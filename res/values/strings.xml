@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PilgrimsPath</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_new_game">New Game</string>
+    <string name="nav_fleet">Fleet</string>
+    <string name="nav_ship">Ship</string>
+    <string name="nav_news">News</string>
+    <string name="nav_combat">Combat</string>
+    <string name="title_activity_fleet">Fleet</string>
+    <string name="title_activity_ship">Ship</string>
+    <string name="ship_modules">Mods</string>
+    <string name="ship_people">People</string>
+    <string name="ship_shuttles">Dock</string>
+    <string name="ship_stats">Stats</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_combat">Combat</string>
+    <string name="title_activity_news">News</string>
+
+</resources>
