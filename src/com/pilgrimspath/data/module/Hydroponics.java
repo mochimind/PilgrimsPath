@@ -1,37 +1,12 @@
 package com.pilgrimspath.data.module;
 
-import com.pilgrimspath.data.resource.Resource;
-import com.pilgrimspath.data.resource.ResourceBundle;
+import com.pilgrimspath.data.Ship;
 
 public class Hydroponics extends Module {
-
-	private static ResourceBundle _buildCost = null;
-	private static ResourceBundle _demolishReward = null;
 	
-	@Override
-	public String name() { return Module.HYDROPONICS; }
+	public static final String NAME = "Hydroponics Lab";
 	
-	@Override 
-	public ResourceBundle buildCost() {
-		if (_buildCost == null) {
-			_buildCost = new ResourceBundle();
-			_buildCost.add(new Resource(Resource.POLYMER_NAME, 15));
-		}
-		return _buildCost;
+	public Hydroponics(Ship _container) {
+		super(_container);
 	}
-	
-	@Override
-	public ResourceBundle demolishReward() {
-		if (_demolishReward == null) {
-			_demolishReward = new ResourceBundle();
-			_demolishReward.add(new Resource(Resource.POLYMER_NAME, 4));
-		}
-		return _demolishReward;
-	}
-	
-	@Override
-	public int laborRequired() { return 1; }
-	
-	@Override
-	public int powerRequired() { return 2; }
 }

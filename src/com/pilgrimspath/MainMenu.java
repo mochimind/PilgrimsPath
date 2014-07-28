@@ -1,5 +1,7 @@
 package com.pilgrimspath;
 
+import com.pilgrimspath.data.Game;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,7 +21,7 @@ public class MainMenu extends Activity {
 		newGame.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				// warp to the patient consent builder
+				Game.StartNewGame();
 				Intent intent = new Intent(MainMenu.this, FleetActivity.class);
 				startActivity(intent);
 

@@ -1,4 +1,4 @@
-package com.pilgrimspath.data.resource;
+package com.pilgrimspath.data;
 
 public class Resource {
 
@@ -21,11 +21,11 @@ public class Resource {
 	public static final String SHIELDING_NAME = "shielding";
 	
 	public String name;
-	public int amount;
-	public float volume;
+	public double amount;
+	public double volume;
 	
 	// TODO: change this to implement volume
-	public Resource(String _name, int _amount) {
+	public Resource(String _name, double _amount) {
 		name = _name;
 		amount = _amount;
 		volume = 1f;
@@ -47,7 +47,7 @@ public class Resource {
 	}
 	
 	public boolean remove(Resource res) {
-		if (res.name == name) {
+		if (res.name.equals(name)) {
 			if (amount < res.amount) {
 				return false;
 			} else {
@@ -57,5 +57,22 @@ public class Resource {
 			}
 		}
 		return false;
+	}
+	
+	// removes units number of res from this resource stockpile
+	public int remove(int units, Resource res) {
+		if (res.name.equals(name)) {
+			int removing = (int) Math.min(amount / res.amount, units);
+			amount -= res.amount * removing;
+			return removing;
+		} else {
+			return 0;
+		}
+	}
+	
+	public void add(int units, Resource res) {
+		if (res.name.equals(name)) {
+			amount += res.amount * units;
+		}
 	}
 }
