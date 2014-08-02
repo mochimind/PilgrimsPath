@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="?android:attr/buttonBarStyle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+	<Button
+		android:id="@+id/ship_modules"
+		style="?android:attr/buttonBarButtonStyle"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:layout_weight="1"
+		android:text="@string/ship_modules" />
+		
+	<Button
+	    android:id="@+id/ship_people"
+	    style="?android:attr/buttonBarButtonStyle"
+	    android:layout_width="0dp"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="1"
+	    android:text="@string/ship_people" />
+	
+	<Button
+	    android:id="@+id/ship_stats"
+	    style="?android:attr/buttonBarButtonStyle"
+	    android:layout_width="0dp"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="1"
+	    android:text="@string/ship_stats" />
+	
+	<Button
+	    android:id="@+id/ship_shuttles"
+	    style="?android:attr/buttonBarButtonStyle"
+	    android:layout_width="0dp"
+	    android:layout_height="wrap_content"
+	    android:layout_weight="1"
+	    android:text="@string/ship_shuttles" />
+</LinearLayout>

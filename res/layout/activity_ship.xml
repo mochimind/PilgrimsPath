@@ -7,117 +7,26 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ShipActivity" >
-
-	<LinearLayout 
-	    style="?android:attr/buttonBarStyle"
-	    android:id="@+id/ship_options"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentTop="true"
-		android:layout_centerHorizontal="true"
-		android:orientation="horizontal" >
-
-		<Button
-			android:id="@+id/ship_modules"
-			style="?android:attr/buttonBarButtonStyle"
-			android:layout_width="0dp"
-			android:layout_height="wrap_content"
-			android:layout_weight="1"
-			android:text="@string/ship_modules" />
-			
-		<Button
-		    android:id="@+id/ship_people"
-		    style="?android:attr/buttonBarButtonStyle"
-		    android:layout_width="0dp"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    android:text="@string/ship_people" />
-
-	    <Button
-	        android:id="@+id/ship_stats"
-	        style="?android:attr/buttonBarButtonStyle"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:text="@string/ship_stats" />
-
-	    <Button
-	        android:id="@+id/ship_shuttles"
-	        style="?android:attr/buttonBarButtonStyle"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:text="@string/ship_shuttles" />
-	</LinearLayout>
     
-	<ListView
-		android:id="@+id/ship_building_list"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/ship_options"
-		android:layout_above="@+id/ship_main_nav" />
-    	
-	<ListView
-		android:id="@+id/ship_people_list"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/ship_options"
-		android:layout_above="@+id/ship_main_nav" />
-    	
-	<ListView
-		android:id="@+id/ship_shuttle_list"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/ship_options"
-		android:layout_above="@+id/ship_main_nav" />
-    	
-	<ListView
-		android:id="@+id/ship_stat_list"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_below="@+id/ship_options"
-		android:layout_above="@+id/ship_main_nav" />
-			
-	<LinearLayout
-	    style="?android:attr/buttonBarStyle"
+	<fragment class="com.pilgrimspath.FragmentShipNav"
+	    android:id="@+id/ship_nav"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true" />
+
+	<fragment class="com.pilgrimspath.FragmentMainNav"
 	    android:id="@+id/ship_main_nav"
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_alignParentBottom="true"
-	    android:layout_centerHorizontal="true"
-	    android:orientation="horizontal" >
+	    android:layout_alignLeft="@+id/ship_body"
+	    android:layout_alignParentBottom="true" />
 
-	    <Button
-	        android:id="@+id/ship_nav_fleet"
-	        style="?android:attr/buttonBarButtonStyle"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:text="@string/nav_fleet" />
-
-	    <Button
-	        android:id="@+id/ship_nav_ship"
-	        style="?android:attr/buttonBarButtonStyle"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:text="@string/nav_ship" />
-
-	    <Button
-	        android:id="@+id/ship_nav_news"
-	        style="?android:attr/buttonBarButtonStyle"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:text="@string/nav_news" />
-
-	    <Button
-	        android:id="@+id/ship_nav_combat"
-	        style="?android:attr/buttonBarButtonStyle"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:text="@string/nav_combat" />
-	</LinearLayout>
-
+	<FrameLayout
+	    android:id="@+id/ship_body"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignLeft="@+id/ship_nav"
+	    android:layout_below="@+id/ship_nav" >
+	</FrameLayout>
+			
 </RelativeLayout>

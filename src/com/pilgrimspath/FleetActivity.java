@@ -4,52 +4,13 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 
-public class FleetActivity extends Activity {
+public class FleetActivity extends Activity implements FragmentMainNav.MainNavListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fleet);
-		
-		Button fleetNav = (Button) findViewById(R.id.fleet_nav_fleet);
-		fleetNav.setEnabled(false);
-		
-		Button shipNav = (Button) findViewById(R.id.fleet_nav_ship);
-		shipNav.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				// warp to the patient consent builder
-				Intent intent = new Intent(FleetActivity.this, ShipActivity.class);
-				startActivity(intent);
-
-			}
-		});
-
-		Button newsNav = (Button) findViewById(R.id.fleet_nav_news);
-		newsNav.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				// warp to the patient consent builder
-				Intent intent = new Intent(FleetActivity.this, NewsActivity.class);
-				startActivity(intent);
-
-			}
-		});
-
-		Button combatNav = (Button) findViewById(R.id.fleet_nav_combat);
-		combatNav.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				// warp to the patient consent builder
-				Intent intent = new Intent(FleetActivity.this, CombatActivity.class);
-				startActivity(intent);
-
-			}
-		});
 
 	}
 
@@ -59,5 +20,8 @@ public class FleetActivity extends Activity {
 		getMenuInflater().inflate(R.menu.fleet, menu);
 		return true;
 	}
+
+	@Override
+	public int getCurrentPanel() { return FragmentMainNav.MAIN_NAV_FLEET; }
 
 }
