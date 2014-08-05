@@ -5,7 +5,7 @@
     android:orientation="horizontal" >
   
 	<ListView
-		android:id="@+id/ship_shuttle_list"
+		android:id="@+id/ship_dock_list"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" />
 

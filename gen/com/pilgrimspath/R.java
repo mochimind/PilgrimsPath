@@ -24,24 +24,32 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080011;
+        public static final int action_settings=0x7f080019;
         public static final int fleet_main_nav=0x7f080000;
-        public static final int main_nav_combat=0x7f080008;
-        public static final int main_nav_fleet=0x7f080005;
-        public static final int main_nav_news=0x7f080007;
-        public static final int main_nav_ship=0x7f080006;
+        public static final int lv_ship_crew=0x7f080014;
+        public static final int lv_ship_name=0x7f080013;
+        public static final int lv_shuttle_count=0x7f080018;
+        public static final int lv_shuttle_less=0x7f080015;
+        public static final int lv_shuttle_more=0x7f080016;
+        public static final int lv_shuttle_name=0x7f080017;
+        public static final int main_nav_combat=0x7f08000a;
+        public static final int main_nav_fleet=0x7f080007;
+        public static final int main_nav_news=0x7f080009;
+        public static final int main_nav_ship=0x7f080008;
         public static final int main_new_game=0x7f080001;
         public static final int ship_body=0x7f080004;
+        public static final int ship_dock_list=0x7f08000b;
+        public static final int ship_list=0x7f080005;
+        public static final int ship_list_main_nav=0x7f080006;
         public static final int ship_main_nav=0x7f080003;
-        public static final int ship_mods_list=0x7f08000a;
-        public static final int ship_modules=0x7f08000b;
+        public static final int ship_mods_list=0x7f08000c;
+        public static final int ship_modules=0x7f08000d;
         public static final int ship_nav=0x7f080002;
-        public static final int ship_people=0x7f08000c;
-        public static final int ship_people_list=0x7f08000f;
-        public static final int ship_shuttle_list=0x7f080009;
-        public static final int ship_shuttles=0x7f08000e;
-        public static final int ship_stat_list=0x7f080010;
-        public static final int ship_stats=0x7f08000d;
+        public static final int ship_people=0x7f08000e;
+        public static final int ship_people_list=0x7f080011;
+        public static final int ship_shuttles=0x7f080010;
+        public static final int ship_stat_list=0x7f080012;
+        public static final int ship_stats=0x7f08000f;
     }
     public static final class layout {
         public static final int activity_combat=0x7f030000;
@@ -49,12 +57,15 @@ public final class R {
         public static final int activity_main_menu=0x7f030002;
         public static final int activity_news=0x7f030003;
         public static final int activity_ship=0x7f030004;
-        public static final int fragment_main_nav=0x7f030005;
-        public static final int fragment_ship_dock=0x7f030006;
-        public static final int fragment_ship_mods=0x7f030007;
-        public static final int fragment_ship_nav=0x7f030008;
-        public static final int fragment_ship_people=0x7f030009;
-        public static final int fragment_ship_stats=0x7f03000a;
+        public static final int activity_ship_list=0x7f030005;
+        public static final int fragment_main_nav=0x7f030006;
+        public static final int fragment_ship_dock=0x7f030007;
+        public static final int fragment_ship_mods=0x7f030008;
+        public static final int fragment_ship_nav=0x7f030009;
+        public static final int fragment_ship_people=0x7f03000a;
+        public static final int fragment_ship_stats=0x7f03000b;
+        public static final int listview_ship=0x7f03000c;
+        public static final int listview_shuttle=0x7f03000d;
     }
     public static final class menu {
         public static final int combat=0x7f070000;
@@ -62,11 +73,14 @@ public final class R {
         public static final int main_menu=0x7f070002;
         public static final int news=0x7f070003;
         public static final int ship=0x7f070004;
+        public static final int ship_list=0x7f070005;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
-        public static final int hello_world=0x7f05000d;
+        public static final int hello_world=0x7f05000f;
+        public static final int lv_shuttle_less=0x7f05000e;
+        public static final int lv_shuttle_more=0x7f05000d;
         public static final int main_nav_combat=0x7f050006;
         public static final int main_nav_fleet=0x7f050003;
         public static final int main_nav_news=0x7f050005;
@@ -76,10 +90,11 @@ public final class R {
         public static final int ship_people=0x7f05000a;
         public static final int ship_shuttles=0x7f05000b;
         public static final int ship_stats=0x7f05000c;
-        public static final int title_activity_combat=0x7f05000e;
+        public static final int title_activity_combat=0x7f050010;
         public static final int title_activity_fleet=0x7f050007;
-        public static final int title_activity_news=0x7f05000f;
+        public static final int title_activity_news=0x7f050011;
         public static final int title_activity_ship=0x7f050008;
+        public static final int title_activity_ship_list=0x7f050012;
     }
     public static final class style {
         /** 

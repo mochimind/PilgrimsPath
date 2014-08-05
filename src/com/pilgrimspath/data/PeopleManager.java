@@ -1,8 +1,8 @@
 package com.pilgrimspath.data;
 
 public class PeopleManager {
-	private float population;
-	private int maxPopulation;
+	public int population;
+	public int maxPopulation;
 	private int lifeSupport;
 	//private float happiness;
 	private float health; 
@@ -81,7 +81,7 @@ public class PeopleManager {
 		if (health < MORTALITY_THRESHOLD) {
 			// each tick, a certain number of the sick will die
 			float percentSick = MORTALITY_THRESHOLD - health;
-			population = (1 + (birthRate - (percentSick * MORTALITY_RATE) - deathRate)) * population; 
+			population = (int) (1 + (birthRate - (percentSick * MORTALITY_RATE) - deathRate)) * population; 
 			// limit to feasible numbers
 			population = Math.min(Math.max(population,0), maxPopulation);
 		}

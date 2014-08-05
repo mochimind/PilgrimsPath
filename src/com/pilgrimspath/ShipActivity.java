@@ -7,13 +7,17 @@ import android.view.Menu;
 public class ShipActivity extends Activity implements FragmentShipNav.ShipNavListener, FragmentMainNav.MainNavListener {
 
 	private int curFrame;
-	
+	public int shipID;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO make this load the last page that was being shows
 		curFrame = FragmentShipNav.SHIP_NAV_MODULES;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ship);
+
+		Bundle args = getIntent().getExtras();
+		shipID = args.getInt(ShipList.DATA_SHIP_ID);
 		
 	}
 

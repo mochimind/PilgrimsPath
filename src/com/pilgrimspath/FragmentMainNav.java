@@ -104,7 +104,7 @@ public class FragmentMainNav extends Fragment {
 			startActivity(intent);
 			break;
 		case FragmentMainNav.MAIN_NAV_SHIP:
-			intent = new Intent(getActivity(), ShipActivity.class);
+			intent = new Intent(getActivity(), ShipList.class);
 			startActivity(intent);
 			break;
 		}

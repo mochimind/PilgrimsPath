@@ -38,6 +38,10 @@
             android:name="com.pilgrimspath.NewsActivity"
             android:label="@string/title_activity_news" >
         </activity>
+        <activity
+            android:name="com.pilgrimspath.ShipList"
+            android:label="@string/title_activity_ship_list" >
+        </activity>
     </application>
 
 </manifest>

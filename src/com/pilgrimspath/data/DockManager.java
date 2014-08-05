@@ -15,8 +15,8 @@ public class DockManager {
 	
 	public static int START_SIZE = 2;
 
-	public static int ROLE_PARKED = 0;
-	public static int ROLE_GASSING = 100;
+	public static final int ROLE_PARKED = 0;
+	public static final int ROLE_GASSING = 100;
 
 	// TODO: change so that crew on shuttle aren't counted to crew on ship for life support
 	
@@ -112,6 +112,37 @@ public class DockManager {
 		}		
 	}
 	
+	// gets the number of Shuttles of the type entry from all lists
+	public int getCount(String entry) {
+		int out = 0;
+		out += getCount(parkedShuttles, entry);
+		out += getCount(gassingShuttles, entry);
+		
+		return out;
+	}
+	
+	// gets number of shuttles of type entry with the role
+	public int getCount(String entry, int role) {
+		switch (role) {
+		case ROLE_PARKED:
+			return getCount(parkedShuttles, entry);
+		case ROLE_GASSING:
+			return getCount(gassingShuttles, entry);
+		default:
+			return 0;
+		}
+	}
+	
+	private static int getCount(List<Shuttle> useList, String entry) {
+		for (int i=0 ; i<useList.size() ; i++) {
+			if (useList.get(i).getName().equals(entry)) {
+				return useList.get(i).count;
+			}
+		}
+		return 0;
+	}
+	
+	// adds count number of entry Shuttles to the specified list
 	public static boolean ModifyList(List<Shuttle> list, String entry, int count) {
 		if (list == null || entry == null || count == 0) { return false; }
 		boolean isAdd = count > 0;

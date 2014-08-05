@@ -10,7 +10,7 @@ public class Game {
 	// creates a new game
 	public static void StartNewGame() {
 		playerFleet = new Fleet();
-		playerFleet.addShip(new Ship(playerFleet, "Noobmobile"));
+		playerFleet.addShip(new Ship(playerFleet, "Noobmobile", "Noobmobile"));
 		playerFleet.resources.add(new Resource(Resource.POLYMER_NAME, 1000));
 	}
 	
