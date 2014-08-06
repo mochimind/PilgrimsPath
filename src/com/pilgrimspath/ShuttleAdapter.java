@@ -5,6 +5,7 @@ import java.util.List;
 import com.pilgrimspath.data.DockManager;
 import com.pilgrimspath.data.Ship;
 import com.pilgrimspath.data.shuttle.Shuttle;
+import com.pilgrimspath.data.shuttle.ShuttleStatManager;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -18,22 +19,22 @@ import android.widget.TextView;
 public class ShuttleAdapter extends ArrayAdapter<Shuttle> {
 	
 	private List<Shuttle> shuttles;
-	private Ship ship;
+	private int layout;
 	private int role, roleCount, parkedCount, totalCount;
 	private Button addShuttle, subShuttle;
 	
-	public ShuttleAdapter(Context context, int resource, List<Shuttle> objects, Ship _ship, int _role) {
+	public ShuttleAdapter(Context context, int resource, List<Shuttle> objects, int _role) {
 		super(context, resource, objects);
 		shuttles = objects;
-		ship = _ship;
 		role = _role;
+		layout = resource;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) getContext()
 		        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.listview_ship, parent, false);
+		View rowView = inflater.inflate(layout, parent, false);
 		
 		Shuttle rowItem = shuttles.get(position);
 
@@ -42,11 +43,11 @@ public class ShuttleAdapter extends ArrayAdapter<Shuttle> {
 		addShuttle = (Button) rowView.findViewById(R.id.lv_shuttle_more);
 		subShuttle = (Button) rowView.findViewById(R.id.lv_shuttle_less);
 
-		name.setText(rowItem.getName());
+		name.setText(ShuttleStatManager.GetStat(rowItem.type).name());
 		
-		roleCount = ship.dock.getCount(rowItem.getName(), role);
-		parkedCount = ship.dock.getCount(rowItem.getName(), DockManager.ROLE_PARKED);
-		totalCount = ship.dock.getCount(rowItem.getName());
+		roleCount = rowItem.getRole(role);
+		parkedCount = rowItem.getParked();
+		totalCount = rowItem.getTotal();
 		
 		if (role == DockManager.ROLE_PARKED) {
 			count.setText(parkedCount + "/" + totalCount);
@@ -56,28 +57,30 @@ public class ShuttleAdapter extends ArrayAdapter<Shuttle> {
 			count.setText( roleCount + "(" + parkedCount + ")");
 			updateButtonStatus();
 			addShuttle.setOnClickListener(new OnClickListener() {
-				private String id;
+				private int id;
 				@Override public void onClick(View arg0) {
-					ship.dock.assignShuttle(id, 1, DockManager.ROLE_PARKED, role);
+					Shuttle s = shuttles.get(id);
+					s.reassign(1, DockManager.ROLE_PARKED, role);
 					updateButtonStatus();
 				}
-				private OnClickListener _initialize(String _id) {
+				private OnClickListener _initialize(int _id) {
 					id = _id;
 					return this;
 				}
-			}._initialize(rowItem.getName()));
+			}._initialize(position));
 			
 			subShuttle.setOnClickListener(new OnClickListener() {
-				private String id;
+				private int id;
 				@Override public void onClick(View arg0) {
-					ship.dock.assignShuttle(id, 1, role, DockManager.ROLE_PARKED);
+					Shuttle s = shuttles.get(id);
+					s.reassign(1, role, DockManager.ROLE_PARKED);
 					updateButtonStatus();
 				}
-				private OnClickListener _initialize(String _id) {
+				private OnClickListener _initialize(int _id) {
 					id = _id;
 					return this;
 				}
-			}._initialize(rowItem.getName()));
+			}._initialize(position));
 		}
 		
 		return rowView;

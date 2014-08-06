@@ -1,5 +1,8 @@
 package com.pilgrimspath;
 
+import com.pilgrimspath.data.Game;
+import com.pilgrimspath.data.Ship;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -7,7 +10,7 @@ import android.view.Menu;
 public class ShipActivity extends Activity implements FragmentShipNav.ShipNavListener, FragmentMainNav.MainNavListener {
 
 	private int curFrame;
-	public int shipID;
+	public Ship ship;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +20,7 @@ public class ShipActivity extends Activity implements FragmentShipNav.ShipNavLis
 		setContentView(R.layout.activity_ship);
 
 		Bundle args = getIntent().getExtras();
-		shipID = args.getInt(ShipList.DATA_SHIP_ID);
+		ship = Game.playerFleet.ships.get(args.getInt(ShipList.DATA_SHIP_ID));
 		
 	}
 

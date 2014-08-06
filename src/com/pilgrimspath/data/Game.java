@@ -1,5 +1,7 @@
 package com.pilgrimspath.data;
 
+import com.pilgrimspath.data.shuttle.ShuttleStatManager;
+
 /*
  * This class stores information about a current game
  */
@@ -10,7 +12,9 @@ public class Game {
 	// creates a new game
 	public static void StartNewGame() {
 		playerFleet = new Fleet();
-		playerFleet.addShip(new Ship(playerFleet, "Noobmobile", "Noobmobile"));
+		Ship starter = new Ship(playerFleet, "Noobmobile", "Noobmobile");
+		playerFleet.addShip(starter);
+		starter.dock.addShuttle(ShuttleStatManager.DIAMONDHEAD, 2);
 		playerFleet.resources.add(new Resource(Resource.POLYMER_NAME, 1000));
 	}
 	
