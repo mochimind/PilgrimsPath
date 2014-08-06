@@ -3,7 +3,6 @@ package com.pilgrimspath;
 import java.util.List;
 
 import com.pilgrimspath.data.DockManager;
-import com.pilgrimspath.data.Ship;
 import com.pilgrimspath.data.shuttle.Shuttle;
 import com.pilgrimspath.data.shuttle.ShuttleStatManager;
 
@@ -20,8 +19,7 @@ public class ShuttleAdapter extends ArrayAdapter<Shuttle> {
 	
 	private List<Shuttle> shuttles;
 	private int layout;
-	private int role, roleCount, parkedCount, totalCount;
-	private Button addShuttle, subShuttle;
+	private int role;
 	
 	public ShuttleAdapter(Context context, int resource, List<Shuttle> objects, int _role) {
 		super(context, resource, objects);
@@ -34,59 +32,78 @@ public class ShuttleAdapter extends ArrayAdapter<Shuttle> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) getContext()
 		        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(layout, parent, false);
+		View rowView = convertView == null ? inflater.inflate(layout, parent, false) : convertView;
 		
 		Shuttle rowItem = shuttles.get(position);
 
 		TextView name = (TextView) rowView.findViewById(R.id.lv_shuttle_name);
-		TextView count = (TextView) rowView.findViewById(R.id.lv_shuttle_count);
-		addShuttle = (Button) rowView.findViewById(R.id.lv_shuttle_more);
-		subShuttle = (Button) rowView.findViewById(R.id.lv_shuttle_less);
+		Button addShuttle = (Button) rowView.findViewById(R.id.lv_shuttle_more);
+		Button subShuttle = (Button) rowView.findViewById(R.id.lv_shuttle_less);
 
 		name.setText(ShuttleStatManager.GetStat(rowItem.type).name());
 		
-		roleCount = rowItem.getRole(role);
-		parkedCount = rowItem.getParked();
-		totalCount = rowItem.getTotal();
+		int roleCount = rowItem.getRoleCount(role);
+		int parkedCount = rowItem.getParked();
+		int totalCount = rowItem.getTotal();
+
+		updateGUI(rowView, roleCount, parkedCount, totalCount);
+		
+		addShuttle.setOnClickListener(new OnClickListener() {
+			private int id;
+			private View parent;
+			@Override public void onClick(View arg0) {
+				Shuttle s = shuttles.get(id);
+				s.reassign(1, DockManager.ROLE_PARKED, role);
+				int roleCount = s.getRoleCount(role);
+				int parkedCount = s.getParked();
+				int totalCount = s.getTotal();
+				updateGUI(parent, roleCount, parkedCount, totalCount);
+			}
+			private OnClickListener _initialize(int _id, View _parent) {
+				id = _id;
+				parent = _parent;
+				return this;
+			}
+		}._initialize(position, rowView));
+		
+		subShuttle.setOnClickListener(new OnClickListener() {
+			private int id;
+			private View parent;
+			@Override public void onClick(View arg0) {
+				Shuttle s = shuttles.get(id);
+				s.reassign(1, role, DockManager.ROLE_PARKED);
+				int roleCount = s.getRoleCount(role);
+				int parkedCount = s.getParked();
+				int totalCount = s.getTotal();
+				updateGUI(parent, roleCount, parkedCount, totalCount);
+			}
+			private OnClickListener _initialize(int _id, View _parent) {
+				id = _id;
+				parent = _parent;
+				return this;
+			}
+		}._initialize(position, rowView));
+		
+		return rowView;
+	}
+	
+	private void updateGUI(View parent, int roleCount, int parkedCount, int totalCount) {
+		TextView count = (TextView) parent.findViewById(R.id.lv_shuttle_count);
+		Button addShuttle = (Button) parent.findViewById(R.id.lv_shuttle_more);
+		Button subShuttle = (Button) parent.findViewById(R.id.lv_shuttle_less);
 		
 		if (role == DockManager.ROLE_PARKED) {
 			count.setText(parkedCount + "/" + totalCount);
 			addShuttle.setVisibility(View.INVISIBLE);
 			subShuttle.setVisibility(View.INVISIBLE);	
 		} else {
+			addShuttle.setVisibility(View.VISIBLE);
+			subShuttle.setVisibility(View.VISIBLE);
 			count.setText( roleCount + "(" + parkedCount + ")");
-			updateButtonStatus();
-			addShuttle.setOnClickListener(new OnClickListener() {
-				private int id;
-				@Override public void onClick(View arg0) {
-					Shuttle s = shuttles.get(id);
-					s.reassign(1, DockManager.ROLE_PARKED, role);
-					updateButtonStatus();
-				}
-				private OnClickListener _initialize(int _id) {
-					id = _id;
-					return this;
-				}
-			}._initialize(position));
-			
-			subShuttle.setOnClickListener(new OnClickListener() {
-				private int id;
-				@Override public void onClick(View arg0) {
-					Shuttle s = shuttles.get(id);
-					s.reassign(1, role, DockManager.ROLE_PARKED);
-					updateButtonStatus();
-				}
-				private OnClickListener _initialize(int _id) {
-					id = _id;
-					return this;
-				}
-			}._initialize(position));
 		}
-		
-		return rowView;
-	}
-	
-	private void updateButtonStatus() {
+
+
+		// update button status
 		if (parkedCount == 0) {
 			addShuttle.setEnabled(false);
 		} else {
@@ -98,6 +115,7 @@ public class ShuttleAdapter extends ArrayAdapter<Shuttle> {
 		} else {
 			subShuttle.setEnabled(true);
 		}
-
 	}
+	
+	public void updateRole(int _role) { role = _role; }
 }

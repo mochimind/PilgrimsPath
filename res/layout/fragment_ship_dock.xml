@@ -2,11 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" >
-  
+    android:orientation="vertical" >
+    
+    <LinearLayout 
+	    style="?android:attr/buttonBarStyle"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+	
+		<Button
+			android:id="@+id/ship_dock_all"
+			style="?android:attr/buttonBarButtonStyle"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/ship_dock_all" />
+			
+		<Button
+		    android:id="@+id/ship_dock_gas"
+		    style="?android:attr/buttonBarButtonStyle"
+		    android:layout_width="0dp"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:text="@string/ship_dock_gas" />
+		
+	</LinearLayout>
+	
 	<ListView
 		android:id="@+id/ship_dock_list"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content" />
+	
 
 </LinearLayout>

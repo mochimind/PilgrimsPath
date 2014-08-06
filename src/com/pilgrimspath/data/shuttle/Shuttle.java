@@ -1,5 +1,7 @@
 package com.pilgrimspath.data.shuttle;
 
+import com.pilgrimspath.data.DockManager;
+
 public class Shuttle {
 	
 	private int total;
@@ -7,10 +9,6 @@ public class Shuttle {
 	private int gassing;
 	
 	public int type;
-	
-	public static final int ROLE_PARKED = 11000;
-	public static final int ROLE_GASSING = 11010;
-	
 	
 	public Shuttle(int _type, int _count) {
 		total = _count;
@@ -22,11 +20,11 @@ public class Shuttle {
 	public int getTotal() { return total; }
 	public int getParked() { return parked; }
 	public int getGassing() { return gassing; }
-	public int getRole(int role) {
+	public int getRoleCount(int role) {
 		switch (role) {
-		case ROLE_PARKED:
+		case DockManager.ROLE_PARKED:
 			return parked;
-		case ROLE_GASSING:
+		case DockManager.ROLE_GASSING:
 			return gassing;
 		default:
 			return 0;
@@ -35,20 +33,20 @@ public class Shuttle {
 	
 	public boolean reassign(int count, int fromRole, int toRole) {
 		switch(fromRole) {
-		case ROLE_PARKED:
+		case DockManager.ROLE_PARKED:
 			if (parked < count) { return false; }
 			switch(toRole) {
-			case ROLE_GASSING:
+			case DockManager.ROLE_GASSING:
 				parked -= count;
 				gassing += count;
 				return true;
 			default:
 				return false;	
 			}
-		case ROLE_GASSING:
+		case DockManager.ROLE_GASSING:
 			if (gassing < count) { return false; }
 			switch (toRole) {
-			case ROLE_PARKED:
+			case DockManager.ROLE_PARKED:
 				gassing -= count;
 				parked += count;
 				return true;
@@ -60,15 +58,15 @@ public class Shuttle {
 		}
 	}
 	
-	public void add(int count) { add(count, ROLE_PARKED); }
+	public void add(int count) { add(count, DockManager.ROLE_PARKED); }
 	
 	public void add(int count, int role) {
 		total += count;
 		switch(role) {
-		case ROLE_PARKED:
+		case DockManager.ROLE_PARKED:
 			parked += role;
 			break;
-		case ROLE_GASSING:
+		case DockManager.ROLE_GASSING:
 			gassing += role;
 			break;
 		default:
@@ -78,12 +76,12 @@ public class Shuttle {
 	
 	public boolean remove(int count, int role) {
 		switch (role) {
-		case ROLE_PARKED:
+		case DockManager.ROLE_PARKED:
 			if (parked < count) { return false; }
 			parked -= count;
 			total -= count;
 			return true;
-		case ROLE_GASSING:
+		case DockManager.ROLE_GASSING:
 			if (gassing < count) { return false; }
 			gassing -= count;
 			total -= count;

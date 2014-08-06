@@ -78,7 +78,7 @@ public class DockManager {
 			} else if (staffed < token.getGassing()) {
 				// didn't staff enough -> bring them back to base
 				int recall = token.getGassing() - staffed;
-				token.reassign(recall, Shuttle.ROLE_GASSING, Shuttle.ROLE_PARKED);
+				token.reassign(recall, ROLE_GASSING, ROLE_PARKED);
 			}
 			
 			// now perform the gassing action
@@ -97,7 +97,7 @@ public class DockManager {
 	
 	public int getCount(int type, int role) {
 		for (int i=0 ; i<shuttles.size() ; i++) {
-			if (shuttles.get(i).type == type) { return shuttles.get(i).getRole(role); }
+			if (shuttles.get(i).type == type) { return shuttles.get(i).getRoleCount(role); }
 		}
 		return 0;
 	}	

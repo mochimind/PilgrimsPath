@@ -13,6 +13,8 @@
     <string name="ship_modules">Mods</string>
     <string name="ship_people">People</string>
     <string name="ship_shuttles">Dock</string>
+    <string name="ship_dock_all">All</string>
+    <string name="ship_dock_gas">Gas</string>
     <string name="ship_stats">Stats</string>
     <string name="lv_shuttle_more">+</string>
     <string name="lv_shuttle_less">-</string>
