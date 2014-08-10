@@ -24,14 +24,14 @@ public class ShipAdapter extends ArrayAdapter<Ship> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) getContext()
 		        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.listview_ship, parent, false);
+		View rowView = convertView == null ? inflater.inflate(R.layout.listview_ship, parent, false) : convertView;
 		
 		Ship rowItem = ships.get(position);
 		
 		TextView name = (TextView) rowView.findViewById(R.id.lv_ship_name);
 		name.setText(rowItem.name);
 		TextView crew = (TextView) rowView.findViewById(R.id.lv_ship_crew);
-		crew.setText("c:" + rowItem.peeps.population + "/" + rowItem.peeps.maxPopulation);
+		crew.setText("c:" + rowItem.peeps.getPopulation() + "/" + rowItem.peeps.getMaxPopulation());
 		
 		return rowView;
 	}

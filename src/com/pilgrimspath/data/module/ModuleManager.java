@@ -29,10 +29,10 @@ public class ModuleManager {
 		usedSpace = 0;
 	}
 	
-	public int addModules(String id, int count) {
+	public int addModules(int id, int count) {
 		Module buildModule = null;
 		for (int i=0 ; i<modules.size() ; i++) {
-			if (modules.get(i).getName().equals(id)) {
+			if (modules.get(i).id == id) {
 				buildModule = modules.get(i);
 			}
 		}
@@ -76,6 +76,8 @@ public class ModuleManager {
 	public void startNewRound() {
 		subscribedPower = 0;
 	}
+	
+	public void adjustPower(int units) { powerOutput += units; }
 	
 	public int checkPower(int units, int powerPerUnit) {
 		int available = powerOutput - subscribedPower;

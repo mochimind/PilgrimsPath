@@ -1,14 +1,20 @@
 package com.pilgrimspath.data;
 
 public class PeopleManager {
-	public int population;
-	public int maxPopulation;
-	private int lifeSupport;
+	private int population = 0;
+	private int maxPopulation = 0;
+	private int lastPopulation = 0;
+	private int lifeSupport = 25;
 	//private float happiness;
-	private float health; 
+	private float health = 1f; 
 	
-	private int curLabor;
-	private int allocatedLabor;	// allocated each tick
+	private int curLabor = 0;
+	private int allocatedLabor = 0;	// allocated each tick
+	private int lastAllocatedLabor = 0;
+	private boolean laborShortage = false;
+	private boolean curLaborShortage = false; // updated each tick
+	private int curRequestedLabor = 0;
+	private int requestedLabor = 0;
 
 	private float birthRate = 0.01f;
 	private float deathRate = 0.002f;
@@ -27,15 +33,6 @@ public class PeopleManager {
 	
 	public PeopleManager(Ship _container) {
 		container = _container;
-		
-		population = 0;
-		maxPopulation = 0;
-		lifeSupport = 0;
-		//happiness = 1f;
-		health = 1f;
-		
-		curLabor = 0;
-		allocatedLabor = 0;
 	}
 	
 	public void tick() {
@@ -47,6 +44,13 @@ public class PeopleManager {
 	
 	public void updateLifeSupport(int supporting) {
 		
+	}
+	
+	public synchronized void addHousing(int units) { maxPopulation += units; }
+
+	public synchronized void removeHousing(int units) { 
+		maxPopulation -= units; 
+		if (maxPopulation < 0) { maxPopulation = 0; }
 	}
 	
 	private void adjustHealth() {
@@ -81,6 +85,7 @@ public class PeopleManager {
 		if (health < MORTALITY_THRESHOLD) {
 			// each tick, a certain number of the sick will die
 			float percentSick = MORTALITY_THRESHOLD - health;
+			lastPopulation = population;
 			population = (int) (1 + (birthRate - (percentSick * MORTALITY_RATE) - deathRate)) * population; 
 			// limit to feasible numbers
 			population = Math.min(Math.max(population,0), maxPopulation);
@@ -98,8 +103,10 @@ public class PeopleManager {
 	
 	// returns the number of units that were supplied with labor
 	public int requestLabor(int units, int laborPerUnit) {
+		curRequestedLabor += units * laborPerUnit;
 		int available = curLabor - allocatedLabor;
 		int supplied = (int) Math.min(units, Math.floor(available / laborPerUnit));
+		if (supplied < units) { curLaborShortage = true; }
 				
 		allocatedLabor += supplied * laborPerUnit;
 		return supplied;
@@ -107,6 +114,25 @@ public class PeopleManager {
 	
 	public void startNewRound() {
 		// reset per tick variables
-		allocatedLabor = 0;	
+		lastAllocatedLabor = 0;
+		allocatedLabor = 0;
+		laborShortage = curLaborShortage;
+		curLaborShortage = false;
+		requestedLabor = curRequestedLabor;
+		curRequestedLabor = 0;
 	}
+	
+	public synchronized void adjustPopulation(int pop) { population += pop; }
+	
+	public synchronized int getPopulation() { return population; }
+	
+	public synchronized int getMaxPopulation() { return maxPopulation; }
+	
+	public synchronized boolean hasLaborShortage() { return laborShortage; }
+	
+	public synchronized int getLastPopulation() { return lastPopulation; }
+	
+	public synchronized int getRequestedLabor() { return requestedLabor; }
+	
+	public synchronized int getAvailableLabor() { return lastAllocatedLabor; }
 }

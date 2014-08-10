@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal" >
-    
+    android:layout_height="wrap_content" >
+
 	<ListView
-		android:id="@+id/ship_people_list"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content" />
+	    android:id="@+id/ship_people_list"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/ship_people_transfer"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentTop="true"/>
+
+	<Button
+	    android:id="@+id/ship_people_transfer"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_alignParentLeft="true" 
+	    android:text="@string/ship_people_transfer" />
+
     
-</LinearLayout>
+</RelativeLayout>

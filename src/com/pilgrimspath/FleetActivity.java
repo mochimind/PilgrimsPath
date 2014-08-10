@@ -2,7 +2,6 @@ package com.pilgrimspath;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
 import android.view.Menu;
 
 public class FleetActivity extends Activity implements FragmentMainNav.MainNavListener {

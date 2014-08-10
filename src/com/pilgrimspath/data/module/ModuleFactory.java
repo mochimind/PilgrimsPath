@@ -3,16 +3,20 @@ package com.pilgrimspath.data.module;
 import com.pilgrimspath.data.Ship;
 
 public class ModuleFactory {
-	public static Module CreateModule(String id, Ship container) {
-		if (id == BasicHousing.NAME) {
+	public static Module CreateModule(int id, Ship container) {
+		switch (id) {
+		case Module.BASIC_HOUSING:
 			return new BasicHousing(container);
-		} else if (id == Hydroponics.NAME) {
+		case Module.HYDROPONICS:
 			return new Hydroponics(container);
-		} else if (id == PolymerFactory.NAME) {
+		case Module.POLYMER_FACTORY:
 			return new PolymerFactory(container);
-		} else if (id == PowerStation.NAME) {
+		case Module.POWER_STATION:
 			return new PowerStation(container);
+		case Module.REFINERY:
+			return new Refinery(container);
+		default:
+			return null;
 		}
-		return new Module(container);
 	}
 }

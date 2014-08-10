@@ -13,8 +13,9 @@ public class Game {
 	public static void StartNewGame() {
 		playerFleet = new Fleet();
 		Ship starter = new Ship(playerFleet, "Noobmobile", "Noobmobile");
-		playerFleet.addShip(starter);
 		starter.dock.addShuttle(ShuttleStatManager.DIAMONDHEAD, 2);
+		starter.peeps.adjustPopulation(10);
+		playerFleet.addShip(starter);
 		playerFleet.resources.add(new Resource(Resource.POLYMER_NAME, 1000));
 	}
 	

@@ -2,7 +2,6 @@ package com.pilgrimspath;
 
 import com.pilgrimspath.data.DockManager;
 import com.pilgrimspath.data.Ship;
-import com.pilgrimspath.data.shuttle.Shuttle;
 
 import android.app.Activity;
 import android.app.Fragment;

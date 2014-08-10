@@ -12,6 +12,7 @@
     <string name="title_activity_ship">Ship</string>
     <string name="ship_modules">Mods</string>
     <string name="ship_people">People</string>
+    <string name="ship_people_transfer">Transfer Crew</string>
     <string name="ship_shuttles">Dock</string>
     <string name="ship_dock_all">All</string>
     <string name="ship_dock_gas">Gas</string>
