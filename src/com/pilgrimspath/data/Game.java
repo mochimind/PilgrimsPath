@@ -1,5 +1,6 @@
 package com.pilgrimspath.data;
 
+import com.pilgrimspath.data.module.Module;
 import com.pilgrimspath.data.shuttle.ShuttleStatManager;
 
 /*
@@ -14,7 +15,9 @@ public class Game {
 		playerFleet = new Fleet();
 		Ship starter = new Ship(playerFleet, "Noobmobile", "Noobmobile");
 		starter.dock.addShuttle(ShuttleStatManager.DIAMONDHEAD, 2);
-		starter.peeps.adjustPopulation(10);
+		starter.mods.rewardModules(Module.BASIC_HOUSING, 2);
+		starter.mods.rewardModules(Module.HYDROPONICS, 2);
+		starter.mods.rewardModules(Module.POWER_STATION, 2);
 		playerFleet.addShip(starter);
 		playerFleet.resources.add(new Resource(Resource.POLYMER_NAME, 1000));
 	}

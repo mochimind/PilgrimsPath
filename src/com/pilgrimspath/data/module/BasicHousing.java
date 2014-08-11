@@ -44,11 +44,11 @@ public class BasicHousing extends Module {
 		return _operatingReward;
 	}
 
-	@Override
-	public int powerCost() { return 5; }
+	@Override public int powerCost() { return 5; }
 
-	@Override
-	public int laborCost() { return 0; }
+	@Override public int laborCost() { return 0; }
+	
+	@Override public int spaceCost() { return 1; }
 
 	@Override
 	public String getName() {

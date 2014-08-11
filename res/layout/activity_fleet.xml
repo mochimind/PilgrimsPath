@@ -8,6 +8,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".FleetActivity" >
 
+    <fragment class="com.pilgrimspath.FragmentResources"
+        android:id="@+id/fleet_resources"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fleet_main_nav" />
+    
 	<fragment class="com.pilgrimspath.FragmentMainNav"
 	    android:id="@+id/fleet_main_nav"
 	    android:layout_width="match_parent"

@@ -29,6 +29,21 @@ public class ModuleManager {
 		usedSpace = 0;
 	}
 	
+	// gives the modules for free to the user provided there is enough space
+	public int rewardModules(int id, int count) {
+		Module buildModule = null;
+		for (int i=0 ; i<modules.size() ; i++) {
+			if (modules.get(i).id == id) {
+				buildModule = modules.get(i);
+			}
+		}
+		if (buildModule == null) {
+			buildModule = ModuleFactory.CreateModule(id, container);
+			modules.add(buildModule);
+		}
+		return buildModule.reward(count);
+	}
+	
 	public int addModules(int id, int count) {
 		Module buildModule = null;
 		for (int i=0 ; i<modules.size() ; i++) {
@@ -36,7 +51,10 @@ public class ModuleManager {
 				buildModule = modules.get(i);
 			}
 		}
-		if (buildModule == null) { buildModule = ModuleFactory.CreateModule(id, container); }
+		if (buildModule == null) { 
+			buildModule = ModuleFactory.CreateModule(id, container);
+			modules.add(buildModule);
+		}
 		return buildModule.build(count);
 	}
 	

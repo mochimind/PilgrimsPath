@@ -51,8 +51,9 @@ public class Refinery extends Module {
 
 	@Override public int powerCost() { return 4; }
 
-	@Override
-	public int laborCost() { return 3; }
+	@Override public int laborCost() { return 3; }
+	
+	@Override public int spaceCost() { return 1; }
 
 	@Override public String getName() { return NAME; }
 

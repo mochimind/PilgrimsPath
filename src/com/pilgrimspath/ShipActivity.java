@@ -15,13 +15,14 @@ public class ShipActivity extends Activity implements FragmentShipNav.ShipNavLis
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO make this load the last page that was being shows
-		curFrame = FragmentShipNav.SHIP_NAV_MODULES;
+		// TODO: figure out if curFrame is needed, seems redundant
+		curFrame = 0;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_ship);
 
 		Bundle args = getIntent().getExtras();
 		ship = Game.playerFleet.ships.get(args.getInt(ShipList.DATA_SHIP_ID));
-		
+		enableFrame(FragmentShipNav.SHIP_NAV_MODULES);
 	}
 
 	@Override
@@ -36,15 +37,19 @@ public class ShipActivity extends Activity implements FragmentShipNav.ShipNavLis
 		if (navElement == FragmentShipNav.SHIP_NAV_DOCK) {
 			FragmentShipDock f = new FragmentShipDock();
 			getFragmentManager().beginTransaction().replace(R.id.ship_body, f).commit();
+			curFrame = FragmentShipNav.SHIP_NAV_DOCK;
 		} else if (navElement == FragmentShipNav.SHIP_NAV_MODULES) {
 			FragmentShipMods f = new FragmentShipMods();
 			getFragmentManager().beginTransaction().replace(R.id.ship_body, f).commit();
+			curFrame = FragmentShipNav.SHIP_NAV_MODULES;
 		} else if (navElement == FragmentShipNav.SHIP_NAV_PEOPLE) {
 			FragmentShipPeople f = new FragmentShipPeople();
 			getFragmentManager().beginTransaction().replace(R.id.ship_body, f).commit();
+			curFrame = FragmentShipNav.SHIP_NAV_PEOPLE;
 		} else if (navElement == FragmentShipNav.SHIP_NAV_STATS) {
 			FragmentShipStats f = new FragmentShipStats();
 			getFragmentManager().beginTransaction().replace(R.id.ship_body, f).commit();
+			curFrame = FragmentShipNav.SHIP_NAV_STATS;
 		}
 	}
 

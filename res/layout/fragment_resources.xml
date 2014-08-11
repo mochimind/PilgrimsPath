@@ -13,29 +13,25 @@
 		    android:id="@+id/resources_gas"
 		    android:layout_width="0dp"
 		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    android:text="GA 999+" />
+		    android:layout_weight="1" />
 	
 		<TextView
 		    android:id="@+id/resources_fuel"
 		    android:layout_width="0dp"
 		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    android:text="FU 999+" />
+		    android:layout_weight="1" />
 	
 		<TextView
 		    android:id="@+id/resources_polymer"
 		    android:layout_width="0dp"
 		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    android:text="PO 999+" />
+		    android:layout_weight="1" />
 	
 		<TextView
 		    android:id="@+id/resources_food"
 		    android:layout_width="0dp"
 		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    android:text="FO 999+" />
+		    android:layout_weight="1" />
     </LinearLayout>
 	
 </LinearLayout>

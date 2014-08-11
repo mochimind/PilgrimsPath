@@ -3,13 +3,14 @@ package com.pilgrimspath;
 import com.pilgrimspath.data.Game;
 import com.pilgrimspath.data.Resource;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class FragmentResources {
+public class FragmentResources extends Fragment {
 
 	private TextView gas, fuel, food, polymer;
 	

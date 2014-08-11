@@ -31,7 +31,7 @@ public abstract class Module {
 		id = 0;
 	}
 	
-	public int spaceCost() { return 0; }
+	public abstract int spaceCost();
 	public abstract ResourceBundle buildCost();
 	public abstract ResourceBundle demolishReward();
 	public abstract ResourceBundle operatingCost();
@@ -54,6 +54,15 @@ public abstract class Module {
 		
 		onBuild(maxBuildable);
 		
+		return maxBuildable;
+	}
+	
+	// doesn't need any resources to build
+	public int reward(int count) {
+		int maxBuildable = container.mods.checkSpace(count, spaceCost());
+		container.mods.useSpace(maxBuildable, spaceCost());
+		built += maxBuildable;
+		onBuild(maxBuildable);
 		return maxBuildable;
 	}
 	
