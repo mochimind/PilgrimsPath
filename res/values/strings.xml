@@ -19,6 +19,8 @@
     <string name="ship_stats">Stats</string>
     <string name="lv_shuttle_more">+</string>
     <string name="lv_shuttle_less">-</string>
+    <string name="lv_mod_more">+</string>
+    <string name="lv_mod_less">-</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_combat">Combat</string>
     <string name="title_activity_news">News</string>

@@ -12,7 +12,7 @@ public class ModuleManager {
 	public static String POLYMER_PLANT = "Polymer Plant";
 	public static String BASIC_HOUSING = "Basic Housing";
 	
-	private List<Module> modules;
+	public List<Module> modules;
 	private Ship container;
 	private int powerOutput;
 	private int subscribedPower;
