@@ -17,9 +17,9 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
 
 	private List<Module> mods;
 	private int layout;
-	private UpdateActivity updatable;	// container to notify on changes
+	private UpdatableReceiver updatable;	// container to notify on changes
 	
-	public ModuleAdapter(Context context, int resource, List<Module> objects, UpdateActivity _updatable) {
+	public ModuleAdapter(Context context, int resource, List<Module> objects, UpdatableReceiver _updatable) {
 		super(context, resource, objects);
 		
 		mods = objects;

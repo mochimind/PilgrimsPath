@@ -13,13 +13,13 @@ public class FragmentShipMods extends UpdatableFragment {
 	private Ship ship;
 	private ModuleAdapter adapter;
 	
-	private UpdateActivity updatableParent;
+	private UpdatableReceiver updatableParent;
 	
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		// TODO: may want to do some error checking here
 		ship = ((ShipContainerActivity) activity).getShip();
-		updatableParent = ((UpdateActivity) activity);
+		updatableParent = ((UpdatableReceiver) activity);
 	}
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedINstanceState) {

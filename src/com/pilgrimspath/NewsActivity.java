@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class NewsActivity extends Activity implements UpdateActivity {
+public class NewsActivity extends Activity implements UpdatableReceiver {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

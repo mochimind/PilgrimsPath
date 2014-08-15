@@ -62,7 +62,7 @@ public class PeopleManager {
 			areHealthy = false;
 			double fleetFood = container.fleet.resources.getResourceCount(Resource.FOOD_NAME);
 			int fed = (int) Math.floor(fleetFood / FOOD_PER_TICK_PER_PERSON);
-			double percentSick = 1 - fed / population;
+			double percentSick = 1 - (population == 0 ? 1 : fed / population);
 
 			// adjust health based on food consumed
 			health -= (float) (percentSick * STARVATION_HEALTH_LOSS_PER_PERCENT);

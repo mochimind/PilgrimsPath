@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,12 +16,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class ShipList extends Activity implements
-		FragmentMainNav.MainNavListener, UpdateActivity {
+		FragmentMainNav.MainNavListener, UpdatableReceiver {
 
 	public static final String DATA_SHIP_ID = "DataShipID";
 	
 	private ShipAdapter adapter;
 
+	private FragmentResources resourceFrag;
+	
 	private final BroadcastReceiver updateReceiver = new BroadcastReceiver() {
 		@Override public void onReceive(Context context, Intent intent) {
 			if (intent.getAction().equals(Ticker.UPDATE_ACTIVITY_ACTION)) {
@@ -29,6 +32,7 @@ public class ShipList extends Activity implements
 			
 		}
 	};
+	private final IntentFilter updateFilter = new IntentFilter(Ticker.UPDATE_ACTIVITY_ACTION);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,16 @@ public class ShipList extends Activity implements
 				startActivity(teleport);
 			}
 		});
+		
+		resourceFrag = (FragmentResources) getFragmentManager().findFragmentById(R.id.ship_list_resources);
+		Ticker.SetActiveActivity(this);
+		registerReceiver(updateReceiver, updateFilter);
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(updateReceiver);
 	}
 
 	@Override
@@ -65,5 +79,6 @@ public class ShipList extends Activity implements
 	
 	public void update() {
 		adapter.notifyDataSetChanged();
+		resourceFrag.update();
 	}
 }

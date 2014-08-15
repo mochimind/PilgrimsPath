@@ -6,14 +6,14 @@ import com.pilgrimspath.data.Ticker;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.Menu;
 
 public class ShipActivity extends Activity implements FragmentShipNav.ShipNavListener, FragmentMainNav.MainNavListener, 
-			UpdateActivity, ShipContainerActivity {
+			UpdatableReceiver, ShipContainerActivity {
 
 	private int curFrameType;
 	private FragmentResources resourceFrag;
@@ -27,6 +27,7 @@ public class ShipActivity extends Activity implements FragmentShipNav.ShipNavLis
 			}
 		}
 	};
+	private final IntentFilter updateFilter = new IntentFilter(Ticker.UPDATE_ACTIVITY_ACTION);
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +41,15 @@ public class ShipActivity extends Activity implements FragmentShipNav.ShipNavLis
 		ship = Game.playerFleet.ships.get(args.getInt(ShipList.DATA_SHIP_ID));
 		//enableFrame(FragmentShipNav.SHIP_NAV_MODULES);
 		
-		resourceFrag = (FragmentResources) Fragment.instantiate(this, FragmentResources.class.getName());
-		
+		resourceFrag = (FragmentResources) getFragmentManager().findFragmentById(R.id.ship_resources);
+		Ticker.SetActiveActivity(this);
+		registerReceiver(updateReceiver, updateFilter);
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(updateReceiver);
 	}
 
 	@Override
@@ -87,7 +95,7 @@ public class ShipActivity extends Activity implements FragmentShipNav.ShipNavLis
 	
 	public void update() {
 		resourceFrag.update();
-		curFrame.update();
+		if (curFrame != null) { curFrame.update(); }
 	}
 	
 	public Ship getShip() { return ship; }

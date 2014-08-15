@@ -1,5 +1,5 @@
 package com.pilgrimspath;
 
-public interface UpdateActivity {
+public interface UpdatableReceiver {
 	public void update();
 }
