@@ -1,7 +1,6 @@
 package com.pilgrimspath;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class FragmentShipNav extends Fragment {
+public class FragmentShipNav extends UpdatableFragment {
 	
 	public static final int SHIP_NAV_MODULES = 1001000;
 	public static final int SHIP_NAV_PEOPLE = 1001010;
@@ -101,4 +100,6 @@ public class FragmentShipNav extends Fragment {
 			stat.setEnabled(true);
 		}
 	}
+	
+	@Override public void update() { updateButtons(activityCallback.getSubMenuPage()); }
 }

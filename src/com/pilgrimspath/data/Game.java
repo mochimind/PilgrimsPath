@@ -18,8 +18,11 @@ public class Game {
 		starter.mods.rewardModules(Module.BASIC_HOUSING, 2);
 		starter.mods.rewardModules(Module.HYDROPONICS, 2);
 		starter.mods.rewardModules(Module.POWER_STATION, 2);
+		starter.peeps.adjustPopulation(10);
 		playerFleet.addShip(starter);
 		playerFleet.resources.add(new Resource(Resource.POLYMER_NAME, 1000));
+		Thread t = new Thread(new Ticker());
+		t.start();
 	}
 	
 	// loads from save file

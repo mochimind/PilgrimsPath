@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class FragmentMainNav extends Fragment {
+public class FragmentMainNav extends UpdatableFragment {
 	
 	public static final int MAIN_NAV_FLEET = 1011000;
 	public static final int MAIN_NAV_SHIP = 1011010;
@@ -109,4 +109,6 @@ public class FragmentMainNav extends Fragment {
 			break;
 		}
 	}
+	
+	@Override public void update() { adjustButtons(activityCallback.getCurrentPanel()); }
 }

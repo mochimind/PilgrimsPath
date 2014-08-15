@@ -48,7 +48,7 @@ public final class R {
         public static final int resources_fuel=0x7f08000f;
         public static final int resources_gas=0x7f08000e;
         public static final int resources_polymer=0x7f080010;
-        public static final int ship_body=0x7f080005;
+        public static final int ship_body=0x7f080004;
         public static final int ship_dock_all=0x7f080012;
         public static final int ship_dock_gas=0x7f080013;
         public static final int ship_dock_list=0x7f080014;
@@ -62,7 +62,7 @@ public final class R {
         public static final int ship_people=0x7f080017;
         public static final int ship_people_list=0x7f08001a;
         public static final int ship_people_transfer=0x7f08001b;
-        public static final int ship_resources=0x7f080004;
+        public static final int ship_resources=0x7f080005;
         public static final int ship_shuttles=0x7f080019;
         public static final int ship_stat_list=0x7f08001c;
         public static final int ship_stats=0x7f080018;

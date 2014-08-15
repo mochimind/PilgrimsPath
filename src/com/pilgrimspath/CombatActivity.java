@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class CombatActivity extends Activity {
+public class CombatActivity extends Activity implements UpdateActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,4 +19,5 @@ public class CombatActivity extends Activity {
 		return true;
 	}
 
+	public void update() {}
 }

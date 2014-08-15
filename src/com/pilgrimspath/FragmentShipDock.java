@@ -4,7 +4,6 @@ import com.pilgrimspath.data.DockManager;
 import com.pilgrimspath.data.Ship;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class FragmentShipDock extends Fragment {
+public class FragmentShipDock extends UpdatableFragment {
 
 	private Ship ship;
 	private ShuttleAdapter adapter;
@@ -26,7 +25,7 @@ public class FragmentShipDock extends Fragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		// TODO: may want to do some error checking here
-		ship = ((ShipActivity) activity).ship;
+		ship = ((ShipContainerActivity) activity).getShip();
 	}
 	
 	@Override
@@ -76,5 +75,8 @@ public class FragmentShipDock extends Fragment {
 			displayAll.setEnabled(true);
 		}
 	}
-
+	
+	@Override public void update() {
+		adapter.notifyDataSetChanged();
+	}
 }

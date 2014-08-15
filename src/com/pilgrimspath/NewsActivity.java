@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class NewsActivity extends Activity {
+public class NewsActivity extends Activity implements UpdateActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,5 +18,7 @@ public class NewsActivity extends Activity {
 		getMenuInflater().inflate(R.menu.news, menu);
 		return true;
 	}
+	
+	public void update() {}
 
 }

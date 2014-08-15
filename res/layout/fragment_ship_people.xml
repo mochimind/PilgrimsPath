@@ -9,7 +9,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_above="@+id/ship_people_transfer"
 	    android:layout_alignParentLeft="true"
-	    android:layout_alignParentTop="true"/>
+	    android:layout_alignParentTop="true" />
 
 	<Button
 	    android:id="@+id/ship_people_transfer"

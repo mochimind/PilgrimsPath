@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class FragmentResources extends Fragment {
+public class FragmentResources extends UpdatableFragment {
 
 	private TextView gas, fuel, food, polymer;
 	
@@ -26,7 +26,7 @@ public class FragmentResources extends Fragment {
 		return view;
 	}
 	
-	public void update() {
+	@Override public void update() {
 		int setVal = (int)Game.playerFleet.resources.getResourceCount(Resource.GAS_NAME);
 		gas.setText("GA" + (setVal > 999 ? "999+" : setVal));
 		setVal = (int) Game.playerFleet.resources.getResourceCount(Resource.FUEL_NAME);

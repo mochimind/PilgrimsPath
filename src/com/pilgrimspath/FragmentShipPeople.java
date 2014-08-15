@@ -9,7 +9,6 @@ import com.pilgrimspath.data.stat.PopulationStat;
 import com.pilgrimspath.data.stat.Stat;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class FragmentShipPeople extends Fragment {
+public class FragmentShipPeople extends UpdatableFragment {
 	
 	private Ship ship;
 	
@@ -31,7 +30,7 @@ public class FragmentShipPeople extends Fragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		// TODO: may want to do some error checking here
-		ship = ((ShipActivity) activity).ship;
+		ship = ((ShipContainerActivity) activity).getShip();
 	}
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedINstanceState) {
@@ -53,5 +52,9 @@ public class FragmentShipPeople extends Fragment {
 		});
 
 		return view;
+	}
+	
+	@Override public void update() {
+		adapter.notifyDataSetChanged();
 	}
 }

@@ -17,12 +17,14 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
 
 	private List<Module> mods;
 	private int layout;
+	private UpdateActivity updatable;	// container to notify on changes
 	
-	public ModuleAdapter(Context context, int resource, List<Module> objects) {
+	public ModuleAdapter(Context context, int resource, List<Module> objects, UpdateActivity _updatable) {
 		super(context, resource, objects);
 		
 		mods = objects;
 		layout = resource;
+		updatable = _updatable;
 	}
 	
 	@Override
@@ -42,7 +44,10 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
 		add.setOnClickListener(new OnClickListener() {
 			Module mod;
 			
-			@Override public void onClick(View arg0) { mod.build(1); }
+			@Override public void onClick(View arg0) { 
+				mod.build(1); 
+				updatable.update();
+			}
 			private OnClickListener initialize(Module _mod) {
 				mod = _mod;
 				return this;
@@ -53,7 +58,10 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
 		sub.setOnClickListener(new OnClickListener() {
 			Module mod;
 			
-			@Override public void onClick(View arg0) { mod.destroy(1); }
+			@Override public void onClick(View arg0) { 
+				mod.destroy(1);
+				updatable.update();
+			}
 			private OnClickListener initialize(Module _mod) {
 				mod = _mod;
 				return this;
