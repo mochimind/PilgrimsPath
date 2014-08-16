@@ -74,7 +74,11 @@ public abstract class Module {
 		
 		built -= destroyed;
 		onDisable(destroyed);
-		lastOperated -= destroyed;
+		if (disabled > 0) { disabled -= destroyed; }
+		if (disabled < 0) {
+			lastOperated += disabled;
+			disabled = 0;
+		}
 		if (lastOperated < 0) { lastOperated = 0; }
 		return destroyed;
 	}

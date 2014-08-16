@@ -30,10 +30,10 @@ public class PeopleManager {
 	public static final float STARVATION_HEALTH_LOSS_PER_PERCENT = 0.01f;
 	public static final float SUFFOCATION_HEALTH_LOSS_PER_PERCENT = 0.2f;
 	public static final float HEALTH_RECOVER_RATE = 0.02f;
-	public static final float OVERCROWDED_MORTALITY_RATE = 0.02f;
+	public static final float OVERCROWDED_MORTALITY_RATE = 0.05f;
 	
-	public static final float MORTALITY_THRESHOLD = 0.75f;
-	public static final float MORTALITY_RATE = 0.25f;
+	public static final float MORTALITY_THRESHOLD = 1f;	// currently not used
+	public static final float MORTALITY_RATE = 0.05f;
 	
 	public static final float LABOR_PARTICIPATION = 0.7f;
 	
@@ -98,13 +98,19 @@ public class PeopleManager {
 	private synchronized void adjustPopulation() {
 		// aside from base death by aging, mortality kicks in only at a certain population level
 		float sickModifier = 0f;
+		double overcrowdedModifier = 0;
 		if (health < MORTALITY_THRESHOLD) {
 			sickModifier = (MORTALITY_THRESHOLD - health) * MORTALITY_RATE;
 		}
-		population = (1 + (birthRate - sickModifier - deathRate)) * population; 
 		if (population > maxPopulation) {
-			population -= OVERCROWDED_MORTALITY_RATE * (population - maxPopulation);
+			if (maxPopulation == 0) {
+				overcrowdedModifier = OVERCROWDED_MORTALITY_RATE;
+			} else {
+				// currently capping to the mortality rate, this may be too kind
+				overcrowdedModifier = Math.min(OVERCROWDED_MORTALITY_RATE * (population / maxPopulation - 1), OVERCROWDED_MORTALITY_RATE);
+			}
 		}		
+		population = (1 + (birthRate - sickModifier - overcrowdedModifier - deathRate)) * population; 
 
 		// limit to feasible numbers
 		population = Math.max(population,0);
