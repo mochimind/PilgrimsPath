@@ -30,37 +30,35 @@ public class ModuleManager {
 	
 	// gives the modules for free to the user provided there is enough space
 	public int rewardModules(int id, int count) {
-		Module buildModule = null;
+		Module buildModule = ModuleFactory.CreateModule(id, container);
 		for (int i=0 ; i<modules.size() ; i++) {
-			if (modules.get(i).id == id) {
-				buildModule = modules.get(i);
-			}
+			if (modules.get(i).id < buildModule.id) { continue; }
+			if (modules.get(i).id != buildModule.id) { modules.add(i, buildModule); }
+			return buildModule.reward(count);
 		}
-		if (buildModule == null) {
-			buildModule = ModuleFactory.CreateModule(id, container);
-			modules.add(buildModule);
-		}
+		modules.add(buildModule);
 		return buildModule.reward(count);
 	}
 	
 	public int addModules(int id, int count) {
-		Module buildModule = null;
+		Module buildModule = ModuleFactory.CreateModule(id, container);
 		for (int i=0 ; i<modules.size() ; i++) {
-			if (modules.get(i).id == id) {
-				buildModule = modules.get(i);
-			}
+			if (modules.get(i).id < buildModule.id) { continue; }
+			if (modules.get(i).id != buildModule.id) { modules.add(i, buildModule); }
+			return buildModule.build(count);
 		}
-		if (buildModule == null) { 
-			buildModule = ModuleFactory.CreateModule(id, container);
-			modules.add(buildModule);
-		}
+		modules.add(buildModule);
 		return buildModule.build(count);
 	}
 	
-	public int removeModules(String id, int count) {
+	public int removeModules(int id, int count) {
 		for (int i=0 ; i<modules.size() ; i++) {
-			if (modules.get(i).getName().equals(id)) {
-				return modules.get(i).destroy(count);
+			if (modules.get(i).id == id) {
+				int destroyed = modules.get(i).destroy(count);
+				if (modules.get(i).built == 0) {
+					modules.remove(i);
+				}
+				return destroyed;
 			}
 		}
 		return 0;

@@ -14,7 +14,6 @@ public class BasicHousing extends Module {
 	protected static ResourceBundle _operatingCost;
 	protected static ResourceBundle _operatingReward;
 	
-	
 	public BasicHousing(Ship _container) {
 		super(_container);
 		id = Module.BASIC_HOUSING;

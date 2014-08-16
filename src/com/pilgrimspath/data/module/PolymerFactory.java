@@ -7,11 +7,12 @@ import com.pilgrimspath.data.Ship;
 public class PolymerFactory extends Module {
 
 	public static final String NAME = "Polymer Factory";
-	
+
 	protected static ResourceBundle _buildCost;
 	protected static ResourceBundle _demolishReward;
 	protected static ResourceBundle _operatingCost;
-	protected static ResourceBundle _operatingReward;	
+	protected static ResourceBundle _operatingReward;
+	
 	
 	public PolymerFactory(Ship _container) {
 		super(_container);
@@ -59,6 +60,6 @@ public class PolymerFactory extends Module {
 	@Override public int laborCost() { return 2; }
 	
 	@Override public int spaceCost() { return 1; }
-
+	
 	@Override public String getName() { return NAME; }
 }

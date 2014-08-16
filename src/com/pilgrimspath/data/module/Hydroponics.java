@@ -14,6 +14,7 @@ public class Hydroponics extends Module {
 	protected static ResourceBundle _operatingReward;
 	
 	
+	
 	public Hydroponics(Ship _container) {
 		super(_container);
 		id = Module.HYDROPONICS;

@@ -13,13 +13,14 @@ public abstract class Module {
 	public int lastOperated = 0;
 	
 	protected Ship container;
-	protected int id;
-	
-	public static final int BASIC_HOUSING = 31000;
-	public static final int HYDROPONICS = 31010;
-	public static final int POLYMER_FACTORY = 31020;
-	public static final int POWER_STATION = 31030;
-	public static final int REFINERY = 31040;
+	public int id;
+
+	// ID for modules. NOTE: sorted by priority
+	public static final int BASIC_HOUSING = 2001;
+	public static final int HYDROPONICS = 3001;
+	public static final int POLYMER_FACTORY = 7001;
+	public static final int POWER_STATION = 1001;
+	public static final int REFINERY = 4001;
 	
 	public Module(Ship _container) {
 		container = _container;
@@ -95,7 +96,6 @@ public abstract class Module {
 			iterCrewed = reserveAmount;
 		}
 		// try to reserve resources for production
-		ResourceBundle temp = operatingCost();
 		if (operatingCost().resources.size() != 0) { 
 			iterResourced = container.fleet.resources.checkAvailability(reserveAmount, operatingCost());
 			reserveAmount = (int) Math.min(reserveAmount, iterResourced);
