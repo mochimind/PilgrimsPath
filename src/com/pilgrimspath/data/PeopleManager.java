@@ -6,7 +6,9 @@ public class PeopleManager {
 	private int lastPopulation = 0;
 	private int lifeSupport = 25;
 	//private float happiness;
-	private float health = 1f; 
+	private float health = 1f;
+	// TODO: make health, population, labor stats all tracked by PeopleManager
+	private float lastHealth = 1f;
 	
 	private int curLabor = 0;
 	private int allocatedLabor = 0;	// allocated each tick
@@ -55,6 +57,7 @@ public class PeopleManager {
 	}
 	
 	private void adjustHealth() {
+		lastHealth = health;
 		// try to consume food
 		boolean areHealthy = true;
 		Resource useFood = new Resource(Resource.FOOD_NAME, FOOD_PER_TICK_PER_PERSON * population);
@@ -77,7 +80,8 @@ public class PeopleManager {
 		}
 		
 		// if healthy, recover health
-		if (areHealthy) { health += HEALTH_RECOVER_RATE; }		
+		if (areHealthy) { health += HEALTH_RECOVER_RATE; }
+		health = Math.max(Math.min(health, 1f), 0);
 	}
 
 	// adjust population based on health
@@ -139,4 +143,8 @@ public class PeopleManager {
 	public synchronized int getRequestedLabor() { return requestedLabor; }
 	
 	public synchronized int getAvailableLabor() { return lastAllocatedLabor; }
+	
+	public synchronized float getHealth() { return health; }
+	
+	public synchronized float getLastHealth() { return lastHealth; }
 }

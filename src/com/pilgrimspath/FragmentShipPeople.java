@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pilgrimspath.data.Ship;
+import com.pilgrimspath.data.stat.HealthStat;
 import com.pilgrimspath.data.stat.LaborStat;
 import com.pilgrimspath.data.stat.PopulationStat;
 import com.pilgrimspath.data.stat.Stat;
@@ -39,6 +40,7 @@ public class FragmentShipPeople extends UpdatableFragment {
 		stats = new ArrayList<Stat>();
 		stats.add(new PopulationStat(ship));
 		stats.add(new LaborStat(ship));
+		stats.add(new HealthStat(ship));
 		list = (ListView) view.findViewById(R.id.ship_people_list);
 		adapter = new StatAdapter(getActivity(), R.layout.listview_stat, stats);
 		list.setAdapter(adapter);
