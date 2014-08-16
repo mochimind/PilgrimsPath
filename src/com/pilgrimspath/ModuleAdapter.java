@@ -38,14 +38,15 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
 		TextView name = (TextView) rowView.findViewById(R.id.lv_mod_name);
 		TextView count = (TextView) rowView.findViewById(R.id.lv_mod_count);
 		name.setText(rowItem.getName());
-		count.setText(rowItem.lastOperated + "/" + rowItem.built);
+		count.setText(rowItem.lastOperated + "/" + (rowItem.built - rowItem.disabled)+ 
+				"(" + rowItem.disabled + ")");
 
 		Button add = (Button) rowView.findViewById(R.id.lv_mod_more);
 		add.setOnClickListener(new OnClickListener() {
 			Module mod;
 			
 			@Override public void onClick(View arg0) { 
-				mod.build(1); 
+				mod.increment(1); 
 				updatable.update();
 			}
 			private OnClickListener initialize(Module _mod) {
@@ -59,7 +60,7 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
 			Module mod;
 			
 			@Override public void onClick(View arg0) { 
-				mod.destroy(1);
+				mod.decrement(1);
 				updatable.update();
 			}
 			private OnClickListener initialize(Module _mod) {

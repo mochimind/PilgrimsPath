@@ -101,7 +101,7 @@ public class PeopleManager {
 		if (health < MORTALITY_THRESHOLD) {
 			sickModifier = (MORTALITY_THRESHOLD - health) * MORTALITY_RATE;
 		}
-		population = Math.floor((1 + (birthRate - sickModifier - deathRate)) * population); 
+		population = (1 + (birthRate - sickModifier - deathRate)) * population; 
 		if (population > maxPopulation) {
 			population -= OVERCROWDED_MORTALITY_RATE * (population - maxPopulation);
 		}		

@@ -88,7 +88,7 @@ public class ResourceBundle {
 				if (stash.name.equals(need.name)) {
 					found = true;
 					removed = Math.min(removed, stash.remove(units, need));
-					continue;
+					break;
 				}
 			}
 			if (!found) { return 0; }
@@ -107,7 +107,7 @@ public class ResourceBundle {
 				if (stash.name.equals(give.name)) {
 					found = true;
 					stash.add(units, give);
-					continue;
+					break;
 				}
 			}
 			if (!found) { resources.add(units, give); }

@@ -72,10 +72,29 @@ public abstract class Module {
 		int destroyed = (int) Math.min(count, built);
 		container.fleet.resources.add(destroyed, demolishReward());
 		
+		built -= destroyed;
 		onDisable(destroyed);
 		lastOperated -= destroyed;
 		if (lastOperated < 0) { lastOperated = 0; }
 		return destroyed;
+	}
+	
+	// turns a ship on if there are some disabled, otherwise, builds a new one
+	public synchronized void increment(int count) {
+		if (disabled != 0) {
+			disabled--;
+		} else {
+			build(1);
+		}
+	}
+	
+	// turns a ship off if there are some enabled, otherwise, destroys a ship
+	public synchronized void decrement(int count) {
+		if (built > disabled) {
+			disabled++;
+		} else {
+			destroy(1);
+		}
 	}
 	
 	// TODO: ability to build modules that aren't on the ship yet

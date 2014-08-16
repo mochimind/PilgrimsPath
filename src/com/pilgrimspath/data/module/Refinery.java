@@ -49,7 +49,7 @@ public class Refinery extends Module {
 	public ResourceBundle operatingReward() {
 		if (_operatingReward == null) {
 			_operatingReward = new ResourceBundle();
-			_operatingReward.add(new Resource(Resource.GAS_NAME, 20));
+			_operatingReward.add(new Resource(Resource.FUEL_NAME, 20));
 		}
 		return _operatingReward;
 	}
