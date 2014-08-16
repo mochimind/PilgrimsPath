@@ -14,7 +14,8 @@ public class ModuleManager {
 	
 	public List<Module> modules;
 	private Ship container;
-	private int powerOutput;
+	private int powerOutput = 0;
+	private int lastUsedPower = 0;
 	private int subscribedPower;
 	
 	private int maxSpace;
@@ -23,8 +24,6 @@ public class ModuleManager {
 	public ModuleManager(Ship _container, int _space) {
 		modules = new ArrayList<Module>();
 		container = _container;
-		powerOutput = 0;
-		subscribedPower = 0;
 		maxSpace = _space;
 		usedSpace = 0;
 	}
@@ -92,6 +91,7 @@ public class ModuleManager {
 	}
 	
 	public void startNewRound() {
+		lastUsedPower = subscribedPower;
 		subscribedPower = 0;
 	}
 	
@@ -108,5 +108,9 @@ public class ModuleManager {
 		
 		subscribedPower += supplied * powerPerUnit;
 		return supplied;
+	}
+	
+	public synchronized int getPowerUsePercent() {
+		return 100 * lastUsedPower / powerOutput;
 	}
 }

@@ -86,7 +86,7 @@ public class PeopleManager {
 			// each tick, a certain number of the sick will die
 			float percentSick = MORTALITY_THRESHOLD - health;
 			lastPopulation = population;
-			population = (int) (1 + (birthRate - (percentSick * MORTALITY_RATE) - deathRate)) * population; 
+			population = (int) Math.floor((1 + (birthRate - (percentSick * MORTALITY_RATE) - deathRate)) * population); 
 			// limit to feasible numbers
 			population = Math.min(Math.max(population,0), maxPopulation);
 		}
