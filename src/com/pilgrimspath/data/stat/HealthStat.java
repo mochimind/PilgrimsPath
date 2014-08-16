@@ -6,7 +6,7 @@ import com.pilgrimspath.data.Ship;
 public class HealthStat extends Stat {
 
 	private float health;
-	private float lastHealth;
+	private boolean healthDeclining;
 	
 	public static final String NAME = "Health";
 	private Ship host;
@@ -18,13 +18,13 @@ public class HealthStat extends Stat {
 	
 	private void update() {
 		health = host.peeps.getHealth();
-		lastHealth = host.peeps.getLastHealth();
+		healthDeclining = host.peeps.healthDeclining();
 	}
 	
 	@Override public int getStatus() {
 		update();
 		if (health < PeopleManager.MORTALITY_THRESHOLD) { return Stat.STATUS_RED; }
-		if (lastHealth > health) { return Stat.STATUS_YELLOW; }
+		if (healthDeclining) { return Stat.STATUS_YELLOW; }
 		return Stat.STATUS_GREEN;
 	}
 

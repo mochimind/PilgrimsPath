@@ -4,10 +4,10 @@ import com.pilgrimspath.data.Ship;
 
 public class LaborStat extends Stat {
 	private Ship host;
-	private int allocatedLabor;
-	private int requiredLabor;
-	private int lastPop;
-	private int curPop;
+	private int requestedLabor;
+	private int availableLabor;
+	private boolean laborShortage;
+	private boolean populationDeclining;
 	
 	public static final String NAME = "Labor";
 	
@@ -17,18 +17,18 @@ public class LaborStat extends Stat {
 	}
 	
 	private void update() {
-		allocatedLabor = host.peeps.getAvailableLabor();
-		requiredLabor = host.peeps.getRequestedLabor();
-		lastPop = host.peeps.getLastPopulation();
-		curPop = host.peeps.getPopulation();
+		availableLabor = host.peeps.getAvailableLabor();
+		requestedLabor = host.peeps.getRequestedLabor();
+		laborShortage = host.peeps.hasLaborShortage();
+		populationDeclining = host.peeps.populationDeclining();
 	}
 	
 	@Override public int getStatus() {
 		update();
-		if (allocatedLabor < requiredLabor) {
+		if (laborShortage) {
 			return Stat.STATUS_RED;
 		} else {
-			if (lastPop > curPop) {
+			if (populationDeclining) {
 				// population is shrinking => labor is shrinking
 				return Stat.STATUS_YELLOW;
 			} else {
@@ -39,7 +39,7 @@ public class LaborStat extends Stat {
 
 	@Override public String getValue() {
 		update();
-		return allocatedLabor + "/" + requiredLabor;
+		return requestedLabor + "/" + availableLabor;
 	}
 	
 }

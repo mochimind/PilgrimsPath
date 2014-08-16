@@ -15,12 +15,16 @@ public class Game {
 		playerFleet = new Fleet();
 		Ship starter = new Ship(playerFleet, "Noobmobile", "Noobmobile");
 		starter.dock.addShuttle(ShuttleStatManager.DIAMONDHEAD, 2);
-		starter.mods.rewardModules(Module.BASIC_HOUSING, 2);
+		starter.mods.rewardModules(Module.BASIC_HOUSING, 4);
 		starter.mods.rewardModules(Module.HYDROPONICS, 2);
-		starter.mods.rewardModules(Module.POWER_STATION, 2);
-		starter.peeps.adjustPopulation(10);
+		starter.mods.rewardModules(Module.POWER_STATION, 4);
+		starter.mods.rewardModules(Module.REFINERY, 1);
+		starter.mods.rewardModules(Module.POLYMER_FACTORY, 1);
+		starter.peeps.adjustPopulation(30);
 		playerFleet.addShip(starter);
-		playerFleet.resources.add(new Resource(Resource.POLYMER_NAME, 1000));
+		playerFleet.resources.add(new Resource(Resource.POLYMER_NAME, 200));
+		playerFleet.resources.add(new Resource(Resource.FUEL_NAME, 500));
+		playerFleet.resources.add(new Resource(Resource.FOOD_NAME, 500));
 		Thread t = new Thread(new Ticker());
 		t.start();
 	}

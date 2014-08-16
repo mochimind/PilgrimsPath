@@ -7,7 +7,7 @@ public class PopulationStat extends Stat {
 	private Ship host;
 	private int population;
 	private int maxPopulation;
-	private int lastPopulation;
+	private boolean populationDeclining;
 	private boolean laborShortage;
 	
 	public static final String NAME = "Population";
@@ -20,7 +20,7 @@ public class PopulationStat extends Stat {
 	private void update() {
 		population = host.peeps.getPopulation();
 		maxPopulation = host.peeps.getMaxPopulation();
-		lastPopulation = host.peeps.getLastPopulation();
+		populationDeclining = host.peeps.populationDeclining();
 		laborShortage = host.peeps.hasLaborShortage();
 	}
 	
@@ -29,14 +29,13 @@ public class PopulationStat extends Stat {
 	@Override public int getStatus() {
 		update();
 		if (laborShortage) {
-			if (lastPopulation > population) {
-				// population is shrinking
+			if (populationDeclining) {
 				return Stat.STATUS_RED;
 			} else {
 				return Stat.STATUS_YELLOW;
 			}
 		} else {
-			if (lastPopulation > population) {
+			if (populationDeclining) {
 				return Stat.STATUS_YELLOW;
 			} else {
 				return Stat.STATUS_GREEN;

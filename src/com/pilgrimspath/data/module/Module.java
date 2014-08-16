@@ -78,6 +78,8 @@ public abstract class Module {
 		return destroyed;
 	}
 	
+	// TODO: ability to build modules that aren't on the ship yet
+	// TODO: One way to implement this is: all ships show all modules that are unlocked
 	public void tick() {
 		int reserveAmount = built - disabled;
 		int iterPowered, iterCrewed, iterResourced;
