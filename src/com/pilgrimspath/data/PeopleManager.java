@@ -25,6 +25,7 @@ public class PeopleManager {
 	public static final float STARVATION_HEALTH_LOSS_PER_PERCENT = 0.01f;
 	public static final float SUFFOCATION_HEALTH_LOSS_PER_PERCENT = 0.2f;
 	public static final float HEALTH_RECOVER_RATE = 0.02f;
+	public static final float OVERCROWDED_MORTALITY_RATE = 0.02f;
 	
 	public static final float MORTALITY_THRESHOLD = 0.75f;
 	public static final float MORTALITY_RATE = 0.25f;
@@ -85,10 +86,13 @@ public class PeopleManager {
 		if (health < MORTALITY_THRESHOLD) {
 			// each tick, a certain number of the sick will die
 			float percentSick = MORTALITY_THRESHOLD - health;
+			float overcrowdedModifier = OVERCROWDED_MORTALITY_RATE * (maxPopulation - population);
 			lastPopulation = population;
-			population = (int) Math.floor((1 + (birthRate - (percentSick * MORTALITY_RATE) - deathRate)) * population); 
+			// TODO: labor & population colors aren't showing up properly
+			population = (int) Math.floor((1 + (birthRate - (percentSick * MORTALITY_RATE) 
+						- overcrowdedModifier - deathRate)) * population); 
 			// limit to feasible numbers
-			population = Math.min(Math.max(population,0), maxPopulation);
+			population = Math.max(population,0);
 		}
 	}
 	
