@@ -8,6 +8,11 @@ public class PolymerFactory extends Module {
 
 	public static final String NAME = "Polymer Factory";
 	
+	protected static ResourceBundle _buildCost;
+	protected static ResourceBundle _demolishReward;
+	protected static ResourceBundle _operatingCost;
+	protected static ResourceBundle _operatingReward;	
+	
 	public PolymerFactory(Ship _container) {
 		super(_container);
 		id = Module.POLYMER_FACTORY;

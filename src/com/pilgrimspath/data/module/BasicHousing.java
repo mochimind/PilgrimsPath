@@ -8,6 +8,12 @@ public class BasicHousing extends Module {
 
 	public static final String NAME = "Basic Housing";
 	public static final int HOUSING_UNITS = 8;
+
+	protected static ResourceBundle _buildCost;
+	protected static ResourceBundle _demolishReward;
+	protected static ResourceBundle _operatingCost;
+	protected static ResourceBundle _operatingReward;
+	
 	
 	public BasicHousing(Ship _container) {
 		super(_container);
@@ -55,11 +61,11 @@ public class BasicHousing extends Module {
 		return NAME;
 	}
 	
-	@Override public void onBuild(int count) {
+	@Override public void onEnable(int count) {
 		container.peeps.addHousing(count * HOUSING_UNITS);
 	}
 	
-	@Override public void onDestroy(int count) {
+	@Override public void onDisable(int count) {
 		container.peeps.removeHousing(count * HOUSING_UNITS);
 	}
 }

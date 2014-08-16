@@ -5,6 +5,11 @@ import com.pilgrimspath.data.ResourceBundle;
 import com.pilgrimspath.data.Ship;
 
 public class PowerStation extends Module {
+
+	protected static ResourceBundle _buildCost;
+	protected static ResourceBundle _demolishReward;
+	protected static ResourceBundle _operatingCost;
+	protected static ResourceBundle _operatingReward;
 	
 	public static final String NAME = "Power Station";
 	public static final int POWER_OUTPUT = 10;
@@ -55,11 +60,11 @@ public class PowerStation extends Module {
 
 	@Override public String getName() { return NAME; }
 	
-	@Override public void onBuild(int count) {
+	@Override public void onEnable(int count) {
 		container.mods.adjustPower(count * POWER_OUTPUT);
 	}
 	
-	@Override public void onDestroy(int count) {
+	@Override public void onDisable(int count) {
 		container.mods.adjustPower(-1 * count * POWER_OUTPUT);
 	}
 }

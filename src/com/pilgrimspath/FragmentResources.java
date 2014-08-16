@@ -52,7 +52,11 @@ public class FragmentResources extends UpdatableFragment {
 		polymer.setText("PO" + (setVal > 999 ? "999+" : setVal));
 		if (parent != null && parent.getShip() != null) {
 			setVal = (int) (parent.getShip().mods.getPowerUsePercent());
-			power.setText("PW" + setVal);
+			if (setVal > 0) {
+				power.setText("PW" + setVal);
+			} else {
+				power.setText("PW" + "!!");
+			}
 		} else {
 			power.setText("PW NA");
 		}

@@ -111,6 +111,7 @@ public class ModuleManager {
 	}
 	
 	public synchronized int getPowerUsePercent() {
+		if (powerOutput == 0) { return -1; }
 		return 100 * lastUsedPower / powerOutput;
 	}
 }

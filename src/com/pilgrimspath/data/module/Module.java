@@ -15,11 +15,6 @@ public abstract class Module {
 	protected Ship container;
 	protected int id;
 	
-	protected static ResourceBundle _buildCost;
-	protected static ResourceBundle _demolishReward;
-	protected static ResourceBundle _operatingCost;
-	protected static ResourceBundle _operatingReward;
-	
 	public static final int BASIC_HOUSING = 31000;
 	public static final int HYDROPONICS = 31010;
 	public static final int POLYMER_FACTORY = 31020;
@@ -40,7 +35,7 @@ public abstract class Module {
 	public abstract int laborCost();
 	public abstract String getName(); 
 	
-	public int build(int count) {
+	public synchronized int build(int count) {
 		// check how many we can build with the space we have
 		int maxBuildable = container.mods.checkSpace(count, spaceCost());
 		// check how many we can build with the resources we have
@@ -52,28 +47,33 @@ public abstract class Module {
 		container.fleet.resources.remove(maxBuildable, buildCost());
 		built += maxBuildable;
 		
-		onBuild(maxBuildable);
+		onEnable(maxBuildable);
+		lastOperated += maxBuildable;
 		
 		return maxBuildable;
 	}
 	
 	// doesn't need any resources to build
-	public int reward(int count) {
+	public synchronized int reward(int count) {
 		int maxBuildable = container.mods.checkSpace(count, spaceCost());
 		container.mods.useSpace(maxBuildable, spaceCost());
 		built += maxBuildable;
-		onBuild(maxBuildable);
+		onEnable(maxBuildable);
+		lastOperated += maxBuildable;
+		
 		return maxBuildable;
 	}
 	
-	public void onBuild(int count) {}
-	public void onDestroy(int count) {}
+	public void onDisable(int count) {}
+	public void onEnable(int count) {}
 	
-	public int destroy(int count) {
+	public synchronized int destroy(int count) {
 		int destroyed = (int) Math.min(count, built);
 		container.fleet.resources.add(destroyed, demolishReward());
 		
-		onDestroy(destroyed);
+		onDisable(destroyed);
+		lastOperated -= destroyed;
+		if (lastOperated < 0) { lastOperated = 0; }
 		return destroyed;
 	}
 	
@@ -95,6 +95,7 @@ public abstract class Module {
 			iterCrewed = reserveAmount;
 		}
 		// try to reserve resources for production
+		ResourceBundle temp = operatingCost();
 		if (operatingCost().resources.size() != 0) { 
 			iterResourced = container.fleet.resources.checkAvailability(reserveAmount, operatingCost());
 			reserveAmount = (int) Math.min(reserveAmount, iterResourced);
@@ -102,11 +103,19 @@ public abstract class Module {
 			iterResourced = reserveAmount;
 		}
 		
+		if (lastOperated > reserveAmount) {
+			onDisable(lastOperated - reserveAmount);
+		} else if (lastOperated < reserveAmount) { 
+			onEnable(reserveAmount - lastOperated); 
+		}
+		
 		lastOperated = reserveAmount;
 		// consume resources
 		container.fleet.resources.remove(lastOperated, operatingCost());
 		// reward resources
 		container.fleet.resources.add(lastOperated, operatingReward());
+		if (laborCost() != 0) { container.peeps.requestLabor(reserveAmount, laborCost()); }
+		if (powerCost() != 0) { container.mods.requestPower(reserveAmount, powerCost()); }
 		
 		// update metrics
 		powered = iterPowered;

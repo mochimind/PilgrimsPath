@@ -6,6 +6,11 @@ import com.pilgrimspath.data.Ship;
 
 public class Refinery extends Module {
 
+	protected static ResourceBundle _buildCost;
+	protected static ResourceBundle _demolishReward;
+	protected static ResourceBundle _operatingCost;
+	protected static ResourceBundle _operatingReward;
+	
 	public static final String NAME = "Refinery";
 	
 	public Refinery(Ship _container) {

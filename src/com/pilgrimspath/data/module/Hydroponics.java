@@ -8,6 +8,12 @@ public class Hydroponics extends Module {
 	
 	public static final String NAME = "Hydroponics Lab";
 	
+	protected static ResourceBundle _buildCost;
+	protected static ResourceBundle _demolishReward;
+	protected static ResourceBundle _operatingCost;
+	protected static ResourceBundle _operatingReward;
+	
+	
 	public Hydroponics(Ship _container) {
 		super(_container);
 		id = Module.HYDROPONICS;
