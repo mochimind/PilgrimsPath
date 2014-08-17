@@ -31,8 +31,15 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) getContext()
 		        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = convertView == null ? inflater.inflate(layout, parent, false) : convertView;
-		
+		boolean recycling = false;
+		View rowView;
+		if (convertView != null) {
+			recycling = true;
+			rowView = convertView;
+		} else {
+			rowView = inflater.inflate(layout, parent, false);
+		}
+				
 		Module rowItem = mods.get(position);
 		
 		TextView name = (TextView) rowView.findViewById(R.id.lv_mod_name);
@@ -41,33 +48,35 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
 		count.setText(rowItem.lastOperated + "/" + (rowItem.built - rowItem.disabled)+ 
 				"(" + rowItem.disabled + ")");
 
-		Button add = (Button) rowView.findViewById(R.id.lv_mod_more);
-		add.setOnClickListener(new OnClickListener() {
-			Module mod;
+		if (!recycling) {
+			Button add = (Button) rowView.findViewById(R.id.lv_mod_more);
+			add.setOnClickListener(new OnClickListener() {
+				Module mod;
+				
+				@Override public void onClick(View arg0) { 
+					mod.increment(1); 
+					updatable.update();
+				}
+				private OnClickListener initialize(Module _mod) {
+					mod = _mod;
+					return this;
+				}
+			}.initialize(rowItem));
 			
-			@Override public void onClick(View arg0) { 
-				mod.increment(1); 
-				updatable.update();
-			}
-			private OnClickListener initialize(Module _mod) {
-				mod = _mod;
-				return this;
-			}
-		}.initialize(rowItem));
-		
-		Button sub = (Button) rowView.findViewById(R.id.lv_mod_less);
-		sub.setOnClickListener(new OnClickListener() {
-			Module mod;
-			
-			@Override public void onClick(View arg0) { 
-				mod.decrement(1);
-				updatable.update();
-			}
-			private OnClickListener initialize(Module _mod) {
-				mod = _mod;
-				return this;
-			}
-		}.initialize(rowItem));
+			Button sub = (Button) rowView.findViewById(R.id.lv_mod_less);
+			sub.setOnClickListener(new OnClickListener() {
+				Module mod;
+				
+				@Override public void onClick(View arg0) { 
+					mod.decrement(1);
+					updatable.update();
+				}
+				private OnClickListener initialize(Module _mod) {
+					mod = _mod;
+					return this;
+				}
+			}.initialize(rowItem));
+		}
 		
 		return rowView;
 	}

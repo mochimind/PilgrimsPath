@@ -55,7 +55,7 @@ public class FragmentResources extends UpdatableFragment {
 		setVal = (int) Game.playerFleet.resources.getResourceCount(Resource.POLYMER_NAME);
 		polymer.setText("PO" + (setVal > 999 ? "999+" : setVal));
 		if (parent != null && parent.getShip() != null) {
-			setVal = (int) (parent.getShip().mods.getPowerUsePercent());
+			setVal = (int) (parent.getShip().mods.getPowerAvailable());
 			if (setVal > 0) {
 				power.setText("PW" + setVal);
 			} else {

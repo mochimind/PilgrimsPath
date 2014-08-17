@@ -5,7 +5,7 @@ import android.content.Intent;
 
 public class Ticker implements Runnable {
 
-	public static final int TICK_INTERVAL = 1000;
+	public static final int TICK_INTERVAL = 2000;
 	public static final String UPDATE_ACTIVITY_ACTION = "com.pilgrimspath.UpdateActivity";
 	
 	private static Activity active;

@@ -108,8 +108,8 @@ public class ModuleManager {
 		return supplied;
 	}
 	
-	public synchronized int getPowerUsePercent() {
+	public synchronized int getPowerAvailable() {
 		if (powerOutput == 0) { return -1; }
-		return 100 * lastUsedPower / powerOutput;
+		return powerOutput - lastUsedPower;
 	}
 }
