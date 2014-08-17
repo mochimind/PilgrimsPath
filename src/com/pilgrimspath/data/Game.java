@@ -14,7 +14,7 @@ public class Game {
 	public static void StartNewGame() {
 		playerFleet = new Fleet();
 		Ship starter = new Ship(playerFleet, "Noobmobile", "Noobmobile");
-		starter.dock.addShuttle(ShuttleStatManager.DIAMONDHEAD, 2);
+		starter.dock.awardShuttle(ShuttleStatManager.DIAMONDHEAD, 2);
 		starter.mods.rewardModules(Module.BASIC_HOUSING, 4);
 		starter.mods.rewardModules(Module.HYDROPONICS, 2);
 		starter.mods.rewardModules(Module.POWER_STATION, 4);
@@ -25,6 +25,7 @@ public class Game {
 		playerFleet.resources.add(new Resource(Resource.POLYMER_NAME, 200));
 		playerFleet.resources.add(new Resource(Resource.FUEL_NAME, 500));
 		playerFleet.resources.add(new Resource(Resource.FOOD_NAME, 500));
+		playerFleet.resources.add(new Resource(Resource.ALLOYS_NAME, 25));
 		Thread t = new Thread(new Ticker());
 		t.start();
 	}

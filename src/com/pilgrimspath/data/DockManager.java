@@ -42,14 +42,14 @@ public class DockManager {
 		}
 	}
 	
-	public boolean addShuttle(int type, int count) {
+	public boolean awardShuttle(int type, int count) {
 		int requiredSpace = ShuttleStatManager.GetSpaceRequirement(type, count);
 		if (maxSpace - usedSpace < requiredSpace) { return false; }
 		usedSpace += requiredSpace;
 		
 		for (int i=0 ; i<shuttles.size() ; i++) {
 			if (shuttles.get(i).type == type) {
-				shuttles.get(i).add(count);
+				shuttles.get(i).award(count);
 				return true;
 			}
 		}

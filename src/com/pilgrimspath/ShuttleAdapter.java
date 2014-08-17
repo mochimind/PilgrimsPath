@@ -53,7 +53,11 @@ public class ShuttleAdapter extends ArrayAdapter<Shuttle> {
 			private View parent;
 			@Override public void onClick(View arg0) {
 				Shuttle s = shuttles.get(id);
-				s.reassign(1, DockManager.ROLE_PARKED, role);
+				if (role == DockManager.ROLE_PARKED) {
+					s.build(1);
+				} else {
+					s.reassign(1, DockManager.ROLE_PARKED, role);
+				}
 				int roleCount = s.getRoleCount(role);
 				int parkedCount = s.getParked();
 				int totalCount = s.getTotal();
@@ -71,7 +75,12 @@ public class ShuttleAdapter extends ArrayAdapter<Shuttle> {
 			private View parent;
 			@Override public void onClick(View arg0) {
 				Shuttle s = shuttles.get(id);
-				s.reassign(1, role, DockManager.ROLE_PARKED);
+				
+				if (role == DockManager.ROLE_PARKED) {
+					s.destroy(1);
+				} else {
+					s.reassign(1, role, DockManager.ROLE_PARKED);
+				}
 				int roleCount = s.getRoleCount(role);
 				int parkedCount = s.getParked();
 				int totalCount = s.getTotal();
@@ -94,26 +103,25 @@ public class ShuttleAdapter extends ArrayAdapter<Shuttle> {
 		
 		if (role == DockManager.ROLE_PARKED) {
 			count.setText(parkedCount + "/" + totalCount);
-			addShuttle.setVisibility(View.INVISIBLE);
-			subShuttle.setVisibility(View.INVISIBLE);	
-		} else {
-			addShuttle.setVisibility(View.VISIBLE);
-			subShuttle.setVisibility(View.VISIBLE);
-			count.setText( roleCount + "(" + parkedCount + ")");
-		}
-
-
-		// update button status
-		if (parkedCount == 0) {
-			addShuttle.setEnabled(false);
-		} else {
+			if (parkedCount == 0) {
+				subShuttle.setEnabled(false);
+			} else {
+				subShuttle.setEnabled(true);
+			}
 			addShuttle.setEnabled(true);
-		}
-
-		if (roleCount == 0) { 
-			subShuttle.setEnabled(false); 
 		} else {
-			subShuttle.setEnabled(true);
+			count.setText( roleCount + "(" + parkedCount + ")");
+			if (parkedCount == 0) {
+				addShuttle.setEnabled(false);
+			} else {
+				addShuttle.setEnabled(true);
+			}
+
+			if (roleCount == 0) { 
+				subShuttle.setEnabled(false); 
+			} else {
+				subShuttle.setEnabled(true);
+			}
 		}
 	}
 	

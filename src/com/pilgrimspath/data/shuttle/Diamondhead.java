@@ -1,5 +1,8 @@
 package com.pilgrimspath.data.shuttle;
 
+import com.pilgrimspath.data.Resource;
+import com.pilgrimspath.data.ResourceBundle;
+
 /*
  * Light miner
  */
@@ -10,6 +13,14 @@ public class Diamondhead {
 	private static void init() {
 		if (!initialized) {
 			initialized = true;
+			ResourceBundle buildCost = new ResourceBundle();
+			buildCost.add(new Resource(Resource.ALLOYS_NAME, 5));
+			buildCost.add(new Resource(Resource.POLYMER_NAME, 5));
+			
+			ResourceBundle destroyReward = new ResourceBundle();
+			destroyReward.add(new Resource(Resource.ALLOYS_NAME, 2));
+			destroyReward.add(new Resource(Resource.POLYMER_NAME, 2));
+			
 			stats = new ShuttleStat("DiamondHead",
 					"The Diamond Head XT100 all purpose excavation vessel was one of the first vessels " +
 					"of the spacefaring age. Built mainly with space station and satellite technology, " +
@@ -21,7 +32,9 @@ public class Diamondhead {
 					1, // size
 					1, // ore
 					1, // gas
-					2);// crew
+					2, // crew
+					buildCost,
+					destroyReward);
 		}
 	}
 	

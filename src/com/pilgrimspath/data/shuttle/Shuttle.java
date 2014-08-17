@@ -1,6 +1,8 @@
 package com.pilgrimspath.data.shuttle;
 
 import com.pilgrimspath.data.DockManager;
+import com.pilgrimspath.data.Game;
+import com.pilgrimspath.data.ResourceBundle;
 
 public class Shuttle {
 	
@@ -17,10 +19,10 @@ public class Shuttle {
 		type = _type;
 	}
 	
-	public int getTotal() { return total; }
-	public int getParked() { return parked; }
-	public int getGassing() { return gassing; }
-	public int getRoleCount(int role) {
+	public synchronized int getTotal() { return total; }
+	public synchronized int getParked() { return parked; }
+	public synchronized int getGassing() { return gassing; }
+	public synchronized int getRoleCount(int role) {
 		switch (role) {
 		case DockManager.ROLE_PARKED:
 			return parked;
@@ -31,7 +33,7 @@ public class Shuttle {
 		}
 	}
 	
-	public boolean reassign(int count, int fromRole, int toRole) {
+	public synchronized boolean reassign(int count, int fromRole, int toRole) {
 		switch(fromRole) {
 		case DockManager.ROLE_PARKED:
 			if (parked < count) { return false; }
@@ -58,9 +60,17 @@ public class Shuttle {
 		}
 	}
 	
-	public void add(int count) { add(count, DockManager.ROLE_PARKED); }
+	public synchronized void build(int count) { 
+		ResourceBundle buildCost = ShuttleStatManager.GetStat(type).buildCost;
+		int buildable = Game.playerFleet.resources.checkAvailability(count, buildCost);
+		Game.playerFleet.resources.remove(buildable, buildCost);
+		parked += buildable;
+		total += buildable;
+	}
 	
-	public void add(int count, int role) {
+	public synchronized void award(int count) { award(count, DockManager.ROLE_PARKED); }
+	
+	public synchronized void award(int count, int role) {
 		total += count;
 		switch(role) {
 		case DockManager.ROLE_PARKED:
@@ -74,7 +84,7 @@ public class Shuttle {
 		}
 	}
 	
-	public boolean remove(int count, int role) {
+	public synchronized boolean remove(int count, int role) {
 		switch (role) {
 		case DockManager.ROLE_PARKED:
 			if (parked < count) { return false; }
@@ -91,8 +101,12 @@ public class Shuttle {
 		}
 	}
 	
-	public void tick() {
-		
+	public synchronized boolean destroy(int count) {
+		boolean returnVal = remove(count, DockManager.ROLE_PARKED);
+		if (returnVal) {
+			ResourceBundle destroyReward = ShuttleStatManager.GetStat(type).destroyReward;
+			Game.playerFleet.resources.add(count, destroyReward);
+		}
+		return returnVal;
 	}
-	
 }
