@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class FragmentResources extends UpdatableFragment {
 
-	private TextView alloy, gas, fuel, food, ore, polymer, power;
+	private TextView alloy, gas, fuel, food, ore, polymer, power, space;
 	private ShipContainerActivity parent;
 	
 	@Override
@@ -36,6 +36,7 @@ public class FragmentResources extends UpdatableFragment {
 		ore = (TextView) view.findViewById(R.id.resources_ore);
 		polymer = (TextView) view.findViewById(R.id.resources_polymer);
 		power = (TextView) view.findViewById(R.id.resources_power);
+		space = (TextView) view.findViewById(R.id.resources_space);
 		
 		update();
 		return view;
@@ -61,8 +62,11 @@ public class FragmentResources extends UpdatableFragment {
 			} else {
 				power.setText("PW" + "!!");
 			}
+			setVal = parent.getShip().mods.getSpaceAvailable();
+			space.setText("SP" + setVal);
 		} else {
 			power.setText("PW NA");
+			space.setText("SP NA");
 		}
 	}
 }

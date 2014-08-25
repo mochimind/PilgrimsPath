@@ -15,7 +15,7 @@ public class Game {
 		playerFleet = new Fleet();
 		Ship starter = new Ship(playerFleet, "Noobmobile", "Noobmobile");
 		starter.dock.awardShuttle(ShuttleStatManager.DIAMONDHEAD, 2);
-		starter.mods.rewardModules(Module.BASIC_HOUSING, 4);
+		starter.mods.rewardModules(Module.CREW_BARRACKS, 4);
 		starter.mods.rewardModules(Module.HYDROPONICS, 2);
 		starter.mods.rewardModules(Module.POWER_STATION, 4);
 		starter.mods.rewardModules(Module.REFINERY, 1);

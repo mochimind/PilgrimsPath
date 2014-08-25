@@ -18,6 +18,8 @@ public class ModuleManager {
 	private int lastUsedPower = 0;
 	private int subscribedPower;
 	
+	private int buildPoints = 0;
+	
 	private int maxSpace;
 	private int usedSpace;
 	
@@ -111,5 +113,14 @@ public class ModuleManager {
 	public synchronized int getPowerAvailable() {
 		if (powerOutput == 0) { return -1; }
 		return powerOutput - lastUsedPower;
+	}
+	
+	public synchronized int getSpaceAvailable() {
+		return maxSpace - usedSpace;
+	}
+	
+	public synchronized void adjustBuildPoints(int bp) {
+		buildPoints += bp;
+		if (buildPoints < 0) { buildPoints = 0; }
 	}
 }

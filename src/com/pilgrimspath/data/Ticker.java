@@ -11,7 +11,7 @@ public class Ticker implements Runnable {
 	private static Activity active;
 	
 	public static synchronized void SetActiveActivity(Activity a) { active = a; }
-	private static synchronized Activity GetActiveActivity() { return active; }
+	public static synchronized Activity GetActiveActivity() { return active; }
 	@Override
 	public void run() {
 		while (true) {

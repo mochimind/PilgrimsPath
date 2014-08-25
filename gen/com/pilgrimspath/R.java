@@ -51,7 +51,7 @@ public final class R {
         public static final int resources_ore=0x7f080013;
         public static final int resources_polymer=0x7f080010;
         public static final int resources_power=0x7f080012;
-        public static final int resources_tbd1=0x7f080015;
+        public static final int resources_space=0x7f080015;
         public static final int resources_tbd2=0x7f080016;
         public static final int resources_tbd3=0x7f080017;
         public static final int ship_body=0x7f080004;
